@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects – AS Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #c8d5b2;
+      --surface:   #d4dfbc;
+      --card:      #bfcca6;
+      --border:    #8a9e72;
+      --olive:     #4a5e35;
+      --olive-mid: #6b7f54;
+      --text:      #2e3a22;
+      --muted:     #5a6b48;
+      --cream:     #f0eadc;
+      --accent:    #8a9e72;
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--olive);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo img {
+      height: 38px;
+      width: auto;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      opacity: 0.85;
+      transition: opacity .2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a.active {
+      opacity: 1;
+      border-bottom: 2px solid var(--cream);
+      padding-bottom: 2px;
+    }
+    .nav-badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--cream);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-badge::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #a8d08d;
+    }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 60px 80px;
+    }
+
+    /* ── FEATURED PROJECT ── */
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    .featured-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 40px;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-card::before {
+      content: 'FEATURED';
+      position: absolute;
+      top: 20px; right: 20px;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      background: var(--olive);
+      color: var(--cream);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .project-type {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 2.5vw, 28px);
+      color: var(--olive);
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    .project-desc {
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 680px;
+      margin-bottom: 28px;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .meta-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta-value {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .meta-value.highlight {
+      color: var(--olive);
+      font-weight: 600;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .tag {
+      background: rgba(74,94,53,0.12);
+      border: 1px solid rgba(74,94,53,0.25);
+      color: var(--olive);
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .institution {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .institution span { color: var(--text); font-weight: 500; }
+
+    .btn-group { display: flex; gap: 10px; }
+    .btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all .2s;
+      border: 1.5px solid transparent;
+    }
+    .btn-primary {
+      background: var(--olive);
+      color: var(--cream);
+      border-color: var(--olive);
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      background: transparent;
+      color: var(--olive);
+      border-color: var(--border);
+    }
+    .btn-outline:hover { background: rgba(74,94,53,0.08); }
+
+    /* ── OTHER PROJECTS GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(74,94,53,0.12);
+    }
+
+    .placeholder-card {
+      opacity: 0.5;
+      border-style: dashed;
+    }
+    .placeholder-card:hover { transform: none; box-shadow: none; }
+
+    .card-type {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--olive);
+      line-height: 1.3;
+    }
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .card-tag {
+      background: rgba(74,94,53,0.10);
+      border: 1px solid rgba(74,94,53,0.2);
+      color: var(--olive-mid);
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .card-link {
+      font-size: 13px;
+      color: var(--olive);
+      text-decoration: none;
+      font-weight: 500;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+    .card-link:hover { opacity: 0.7; }
+
+    .placeholder-label {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+      margin: auto;
+      padding: 20px 0;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      opacity: 0.4;
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">
+      <img src="assets/logo.png" alt="AS Logo" onerror="this.style.display='none'"/>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-badge">Open To Work</div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- FEATURED: THESIS -->
+    <div class="section-label">Thesis Research</div>
+    <div class="featured-card">
+      <div class="project-type">Final Year Project · Universitas Pakuan · 2026</div>
+      <h2 class="project-title">Egg Viability Sorting Model Using Convolutional Neural Network Based on Eggshell Image</h2>
+      <p class="project-desc">
+        A CNN-based mobile application that automatically classifies whether a chicken egg is viable or not by analyzing its eggshell image. Built with MobileNetV2 via transfer learning and deployed as an offline Flutter app — designed to help farmers sort eggs more objectively without internet dependency.
+      </p>
+
+      <div class="project-meta">
+        <div class="meta-item">
+          <span class="meta-label">Accuracy</span>
+          <span class="meta-value highlight">97.40%</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Precision</span>
+          <span class="meta-value highlight">97%</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Recall</span>
+          <span class="meta-value highlight">97%</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Dataset</span>
+          <span class="meta-value">3,073 images</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Model</span>
+          <span class="meta-value">MobileNetV2</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Deployment</span>
+          <span class="meta-value">Flutter (Offline)</span>
+        </div>
+      </div>
+
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">TensorFlow</span>
+        <span class="tag">MobileNetV2</span>
+        <span class="tag">Flutter</span>
+        <span class="tag">TFLite</span>
+        <span class="tag">OpenCV</span>
+        <span class="tag">Transfer Learning</span>
+        <span class="tag">Computer Vision</span>
+      </div>
+
+      <div class="card-footer">
+        <div class="institution">
+          <span>Ilmu Komputer, FMIPA</span> · Universitas Pakuan · Bogor, 2026
+        </div>
+        <div class="btn-group">
+          <a href="#" class="btn btn-outline">View Paper</a>
+          <a href="#" class="btn btn-primary">GitHub →</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </main>
+</body>
+</html>

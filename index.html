@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio – Sahda Rahani Susilawati</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green-dark:  #5a6e3f;
+      --green-mid:   #6e7f4e;
+      --green-light: #c8d9a8;
+      --green-bg:    #d4e3b5;
+      --green-blob:  #8fa06b;
+      --white:       #ffffff;
+      --text-muted:  #6b7a56;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: var(--green-bg);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--green-dark);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 68px;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 0;
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem; color: var(--white);
+      letter-spacing: -1px;
+      text-decoration: none;
+    }
+    .nav-logo .logo-icon {
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+      margin-right: 0;
+    }
+    .nav-logo .logo-icon img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex; gap: 3rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: opacity .2s;
+    }
+    .nav-links a:hover { opacity: .7; }
+
+    .nav-badge {
+      display: flex; align-items: center; gap: 10px;
+      border: 2px solid var(--white);
+      border-radius: 999px;
+      padding: 7px 20px;
+      color: var(--white);
+      font-size: .95rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      cursor: default;
+    }
+    .badge-dot {
+      width: 14px; height: 14px;
+      background: var(--white);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding-top: 68px;
+      background: var(--green-bg);
+      position: relative;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* blobs */
+    .blob-left {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 280px;
+      pointer-events: none;
+    }
+    .blob-right {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 240px;
+      pointer-events: none;
+    }
+
+    /* ── BIG "PORTFOLIO" TEXT ── */
+    .portfolio-word {
+      position: relative;
+      width: 100%;
+      max-width: 740px;
+      height: 420px;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1rem;
+    }
+
+    /* portfolio image */
+    .portfolio-img {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100%; height: 100%;
+      object-fit: contain;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .avatar-wrap {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -42%);
+      width: 210px; height: 310px;
+      z-index: 10;
+    }
+    .avatar-wrap img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ── NAME ── */
+    .name-block {
+      margin-top: .5rem;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0 1.5rem;
+      animation: fadeUp .8s .3s both;
+    }
+    .name-part {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      color: var(--green-dark);
+      line-height: 1.1;
+    }
+
+    /* ── SUBTITLE ── */
+    .subtitle {
+      margin-top: .6rem;
+      font-size: 1rem;
+      color: var(--text-muted);
+      letter-spacing: .04em;
+      font-weight: 500;
+      animation: fadeUp .8s .5s both;
+    }
+    .subtitle span { margin: 0 .3em; }
+
+    /* ── BUTTON ── */
+    .btn-about {
+      margin-top: 2.2rem;
+      display: inline-block;
+      background: transparent;
+      border: 2px solid var(--green-dark);
+      border-radius: 999px;
+      padding: 14px 56px;
+      font-size: 1.05rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      color: var(--green-dark);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .25s, color .25s, transform .18s;
+      animation: fadeUp .8s .65s both;
+      margin-bottom: 3.5rem;
+    }
+    .btn-about:hover {
+      background: var(--green-dark);
+      color: var(--white);
+      transform: scale(1.04);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="nav-logo" href="#">
+      <div class="logo-icon"><img src="assets/logo.png" alt="Logo"/></div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-badge">
+      <div class="badge-dot"></div>
+      Open To Work
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img class="blob-left"  src="assets/blobs1.png" alt=""/>
+    <img class="blob-right" src="assets/blobs2.png" alt=""/>
+
+    <!-- Big scattered PORTFOLIO letters + avatar -->
+    <div class="portfolio-word">
+      <img class="portfolio-img" src="assets/portfolio.png" alt="Portfolio"/>
+    </div>
+
+    <!-- Name -->
+    <div class="name-block">
+      <span class="name-part">Sahda</span>
+      <span class="name-part">Rahani</span>
+      <span class="name-part">Susilawati</span>
+    </div>
+
+    <!-- Subtitle -->
+    <p class="subtitle">
+      — Computer Science Student<span>·</span>Universitas Pakuan<span>·</span>2026
+    </p>
+
+    <!-- CTA -->
+    <a class="btn-about" href="about.html">About Me?</a>
+  </section>
+
+</body>
+</html>

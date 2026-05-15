@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact – Sahda Rahani Susilawati</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green-dark:  #5a6e3f;
+      --green-mid:   #6e7f4e;
+      --green-card:  #b8c99a;
+      --green-bg:    #d4e3b5;
+      --white:       #ffffff;
+      --text-dark:   #3d4a2e;
+      --text-muted:  #6b7a56;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--green-bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-dark);
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--green-dark);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 68px;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center;
+      text-decoration: none;
+    }
+    .nav-logo .logo-icon {
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo .logo-icon img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex; gap: 3rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: opacity .2s;
+      padding-bottom: 4px;
+    }
+    .nav-links a:hover { opacity: .7; }
+    .nav-links a.active {
+      border-bottom: 2px solid var(--white);
+    }
+
+    .nav-badge {
+      display: flex; align-items: center; gap: 10px;
+      border: 2px solid var(--white);
+      border-radius: 999px;
+      padding: 7px 20px;
+      color: var(--white);
+      font-size: .95rem;
+      font-weight: 500;
+      cursor: default;
+    }
+    .badge-dot {
+      width: 14px; height: 14px;
+      background: var(--white);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── PAGE ── */
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 100px 2rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── PAGE TITLE ── */
+    .page-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 2rem;
+      letter-spacing: -0.5px;
+      animation: fadeUp .7s .1s both;
+    }
+
+    /* ── CONTACT CARD ── */
+    .contact-card {
+      width: 100%;
+      max-width: 780px;
+      border: 2px solid var(--green-mid);
+      border-radius: 22px;
+      padding: 2.4rem 3rem;
+      margin-bottom: 2rem;
+      animation: fadeUp .7s .2s both;
+    }
+
+    /* info table */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+    .info-table tr { vertical-align: middle; }
+    .info-table td {
+      padding: 10px 0;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+    .info-table .label { width: 120px; }
+    .info-table .colon { width: 30px; text-align: center; color: var(--text-muted); }
+    .info-table .value { color: var(--text-dark); }
+    .info-table .value a {
+      color: var(--text-dark);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: opacity .2s;
+    }
+    .info-table .value a:hover { opacity: .65; }
+
+    /* social icons */
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.4rem;
+    }
+    .socials a {
+      display: flex; align-items: center; justify-content: center;
+      width: 52px; height: 52px;
+      color: var(--text-dark);
+      transition: opacity .2s, transform .18s;
+    }
+    .socials a:hover {
+      opacity: .65;
+      transform: scale(1.12);
+    }
+    .socials svg {
+      width: 42px; height: 42px;
+    }
+
+    /* ── CV BUTTON ── */
+    .btn-cv {
+      display: inline-block;
+      background: var(--green-light, #d8e8be);
+      border: 2px solid var(--green-mid);
+      border-radius: 999px;
+      padding: 14px 80px;
+      font-size: 1.05rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      color: var(--text-dark);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .22s, color .22s, transform .18s;
+      animation: fadeUp .7s .35s both;
+    }
+    .btn-cv:hover {
+      background: var(--green-dark);
+      color: var(--white);
+      transform: scale(1.04);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="nav-logo" href="index.html">
+      <div class="logo-icon"><img src="assets/logo.png" alt="Logo"/></div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+
+    <div class="nav-badge">
+      <div class="badge-dot"></div>
+      Open To Work
+    </div>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <main class="page">
+
+    <h1 class="page-title">Contact Information</h1>
+
+    <div class="contact-card">
+
+      <!-- Info rows -->
+      <table class="info-table">
+        <tr>
+          <td class="label">Name</td>
+          <td class="colon">:</td>
+          <td class="value">Sahda Rahani Susilawati</td>
+        </tr>
+        <tr>
+          <td class="label">No. Hp</td>
+          <td class="colon">:</td>
+          <td class="value">0822-1308-1354</td>
+        </tr>
+        <tr>
+          <td class="label">Gmail</td>
+          <td class="colon">:</td>
+          <td class="value"><a href="mailto:sahdarahani@gmail.com">sahdarahani@gmail.com</a></td>
+        </tr>
+        <tr>
+          <td class="label">Domicile</td>
+          <td class="colon">:</td>
+          <td class="value">Bogor, Indonesia</td>
+        </tr>
+      </table>
+
+      <!-- Social Icons -->
+      <div class="socials">
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/_shdrhn?igsh=NDN0bWFoNGV1YTI2&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4.5"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/sahda-rahani-susilawati-66a55a285/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <rect x="2" y="2" width="20" height="20" rx="4" fill="none" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M7 10v7M7 7v.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" fill="none"/>
+            <path d="M11 17v-4c0-1.1.9-2 2-2s2 .9 2 2v4M11 10v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"/>
+          </svg>
+        </a>
+
+        <!-- GitHub -->
+        <a href="https://github.com/sahdacantik" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- CV Button -->
+    <a class="btn-cv" href="https://drive.google.com/drive/folders/1C4R8RNzIC9Na3XWbv6iKtmXvaQb6cxS_?usp=sharing" target="_blank" rel="noopener">My CV</a>
+
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #c8d5b0;
+      --nav-bg: #4a5e3a;
+      --nav-text: #d6e4c0;
+      --text-dark: #3d4f30;
+      --text-muted: #5a6e4a;
+      --btn-bg: #b5c49a;
+      --btn-shadow: #a0b085;
+      --btn-text: #3d4f30;
+      --toggle-bg: #c8d5b0;
+      --toggle-knob: #d6e4c0;
+    }
+
+    body {
+      font-family: 'Lora', serif;
+      background-color: var(--bg);
+      min-height: 100vh;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      background-color: var(--nav-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 68px;
+    }
+
+    .nav-logo img {
+      height: 44px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 48px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .nav-links a.active {
+      border-bottom: 2px solid var(--nav-text);
+      padding-bottom: 2px;
+    }
+
+    /* Open To Work pill */
+    .open-to-work {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1.5px solid var(--nav-text);
+      border-radius: 999px;
+      padding: 7px 20px;
+      color: var(--nav-text);
+      font-family: 'Lora', serif;
+      font-size: 0.92rem;
+      letter-spacing: 0.01em;
+      cursor: default;
+      user-select: none;
+    }
+
+    .toggle-track {
+      width: 32px;
+      height: 18px;
+      background: var(--toggle-bg);
+      border-radius: 999px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .toggle-knob {
+      width: 14px;
+      height: 14px;
+      background: var(--toggle-knob);
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 40px 80px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem, 7vw, 5.2rem);
+      font-weight: 500;
+      color: var(--text-dark);
+      letter-spacing: 0.01em;
+      text-align: center;
+      margin-bottom: 28px;
+      /* Embossed / recessed effect matching the screenshot */
+      text-shadow:
+        2px 2px 4px rgba(255,255,255,0.35),
+        -1px -1px 3px rgba(0,0,0,0.18);
+    }
+
+    .subtitle {
+      font-family: 'Lora', serif;
+      font-size: 1.08rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 760px;
+      line-height: 1.75;
+      margin-bottom: 52px;
+    }
+
+    /* ── PROJECT BUTTONS ── */
+    .project-buttons {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .project-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--btn-bg);
+      color: var(--btn-text);
+      font-family: 'Lora', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      text-decoration: none;
+      padding: 18px 36px;
+      border-radius: 18px;
+      /* Neumorphic inset shadow to match the screenshot */
+      box-shadow:
+        4px 4px 10px rgba(0,0,0,0.15),
+        -2px -2px 6px rgba(255,255,255,0.35),
+        inset 1px 1px 3px rgba(255,255,255,0.25),
+        inset -1px -1px 3px rgba(0,0,0,0.08);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      cursor: pointer;
+      min-width: 240px;
+    }
+
+    .project-btn:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        6px 6px 14px rgba(0,0,0,0.18),
+        -3px -3px 8px rgba(255,255,255,0.4),
+        inset 1px 1px 3px rgba(255,255,255,0.25),
+        inset -1px -1px 3px rgba(0,0,0,0.08);
+    }
+
+    .project-btn:active {
+      transform: translateY(0);
+      box-shadow:
+        2px 2px 6px rgba(0,0,0,0.15),
+        -1px -1px 3px rgba(255,255,255,0.3),
+        inset 2px 2px 5px rgba(0,0,0,0.1),
+        inset -1px -1px 3px rgba(255,255,255,0.2);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 0 18px; }
+      .nav-links { gap: 22px; }
+      .project-buttons { flex-direction: column; align-items: center; }
+      .project-btn { min-width: 80vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.png" alt="Logo" onerror="this.style.display='none'"/>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="open-to-work">
+      <span class="toggle-track">
+        <span class="toggle-knob"></span>
+      </span>
+      Open To Work
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <h1>My Projects</h1>
+
+    <p class="subtitle">
+      Here are some of the projects I've worked on, both independently and as part of a
+      team. Each project helped me learn, explore, and grow as a Computer Science
+      student and creative thinker.
+    </p>
+
+    <div class="project-buttons">
+      <a href="projects_campus.html" class="project-btn">Project Campus</a>
+      <a href="projects_internship.html" class="project-btn">Project - Internship</a>
+      <a href="projects_thesis.html" class="project-btn">Project - Thesis</a>
+    </div>
+  </main>
+
+</body>
+</html>

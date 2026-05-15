@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About – Sahda Rahani Susilawati</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green-dark:  #5a6e3f;
+      --green-mid:   #6e7f4e;
+      --green-card:  #b8c99a;
+      --green-bg:    #d4e3b5;
+      --green-tag:   #c8d9a8;
+      --white:       #ffffff;
+      --text-dark:   #3d4a2e;
+      --text-muted:  #6b7a56;
+    }
+
+    html, body {
+      width: 100%;
+      background: var(--green-bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-dark);
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--green-dark);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 68px;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center;
+      text-decoration: none;
+    }
+    .nav-logo .logo-icon {
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo .logo-icon img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex; gap: 3rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: opacity .2s;
+      padding-bottom: 4px;
+    }
+    .nav-links a:hover { opacity: .7; }
+    .nav-links a.active {
+      border-bottom: 2px solid var(--white);
+    }
+
+    .nav-badge {
+      display: flex; align-items: center; gap: 10px;
+      border: 2px solid var(--white);
+      border-radius: 999px;
+      padding: 7px 20px;
+      color: var(--white);
+      font-size: .95rem;
+      font-weight: 500;
+      cursor: default;
+    }
+    .badge-dot {
+      width: 14px; height: 14px;
+      background: var(--white);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── PAGE ── */
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 100px 2rem 3rem;
+    }
+
+    /* ── HEADER ROW ── */
+    .header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      animation: fadeUp .7s .1s both;
+    }
+
+    .header-text h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      color: var(--text-dark);
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+    .header-text .subtitle {
+      margin-top: .5rem;
+      font-size: .98rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: .04em;
+    }
+    .header-text .subtitle span { margin: 0 .3em; }
+
+    .avatar-box {
+      flex-shrink: 0;
+      width: 110px; height: 110px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--green-card);
+    }
+    .avatar-box img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.55rem;
+      color: var(--green-dark);
+      margin-bottom: 1rem;
+      animation: fadeUp .7s .2s both;
+    }
+
+    /* ── ABOUT CARD ── */
+    .about-card {
+      background: var(--green-card);
+      border-radius: 20px;
+      padding: 2rem 2.2rem;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 2.8rem;
+      animation: fadeUp .7s .3s both;
+    }
+    .about-card p + p {
+      margin-top: 1.2rem;
+    }
+
+    /* ── SKILLS ── */
+    .skills-section {
+      margin-bottom: 3rem;
+      animation: fadeUp .7s .4s both;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .skill-card {
+      background: var(--green-card);
+      border-radius: 20px;
+      padding: 1.6rem 1.8rem;
+    }
+    .skill-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem;
+      justify-content: center;
+    }
+    .tag {
+      background: var(--green-tag);
+      border: 1.5px solid var(--green-dark);
+      border-radius: 999px;
+      padding: 6px 18px;
+      font-size: .92rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      animation: fadeUp .7s .5s both;
+    }
+    .cta-section p {
+      font-size: 1.12rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      line-height: 1.5;
+      margin-bottom: 1.6rem;
+    }
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      border: 2px solid var(--green-dark);
+      border-radius: 999px;
+      padding: 12px 40px;
+      font-size: 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      color: var(--green-dark);
+      background: transparent;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .22s, color .22s, transform .18s;
+    }
+    .btn:hover {
+      background: var(--green-dark);
+      color: var(--white);
+      transform: scale(1.04);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="nav-logo" href="index.html">
+      <div class="logo-icon"><img src="assets/logo.png" alt="Logo"/></div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-badge">
+      <div class="badge-dot"></div>
+      Open To Work
+    </div>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <main class="page">
+
+    <!-- Header -->
+    <div class="header-row">
+      <div class="header-text">
+        <h1>Sahda Rahani Susilawati</h1>
+        <p class="subtitle">— Computer Science Student<span>·</span>Universitas Pakuan<span>·</span>2026</p>
+      </div>
+      <div class="avatar-box">
+        <img src="assets/sahda.png" alt="Sahda Rahani Susilawati"/>
+      </div>
+    </div>
+
+    <!-- About Me -->
+    <h2 class="section-title">About Me</h2>
+    <div class="about-card">
+      <p>I'm a final-year Computer Science student passionate about the intersection of design and AI. My thesis is an end-to-end egg quality classification system — CNN model training with Python &amp; OpenCV, converted to TFLite, with a full UI/UX design process in Figma from user research to interactive prototype.</p>
+      <p>I've worked 2+ years as an Assistant Lecturer, interned at a government institution where I built an internal web documentation system, and created educational content remotely. I value clarity, user-centered thinking, and practical outcomes.</p>
+    </div>
+
+    <!-- Skills -->
+    <section class="skills-section">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid">
+
+        <div class="skill-card">
+          <h3>Design</h3>
+          <div class="tags">
+            <span class="tag">Figma</span>
+            <span class="tag">Wireframe</span>
+            <span class="tag">Prototyping</span>
+            <span class="tag">User Persona</span>
+            <span class="tag">UX Research</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>AI &amp; Data</h3>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">CNN - Keras</span>
+            <span class="tag">TFLite</span>
+            <span class="tag">Data Management</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <p>Interested in working together or having a fun chat about a project?<br>Let's connect!</p>
+      <div class="cta-buttons">
+        <a class="btn" href="projects.html">View My Project</a>
+        <a class="btn" href="contact.html">Contact Me</a>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>

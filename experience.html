@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Experience – Sahda Rahani Susilawati</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green-dark:  #5a6e3f;
+      --green-mid:   #6e7f4e;
+      --green-card:  #b8c99a;
+      --green-bg:    #d4e3b5;
+      --white:       #ffffff;
+      --text-dark:   #3d4a2e;
+      --text-muted:  #6b7a56;
+    }
+
+    html, body {
+      width: 100%;
+      background: var(--green-bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-dark);
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--green-dark);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 68px;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center;
+      text-decoration: none;
+    }
+    .nav-logo .logo-icon {
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo .logo-icon img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex; gap: 3rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: opacity .2s;
+      padding-bottom: 4px;
+    }
+    .nav-links a:hover { opacity: .7; }
+    .nav-links a.active {
+      border-bottom: 2px solid var(--white);
+    }
+
+    .nav-badge {
+      display: flex; align-items: center; gap: 10px;
+      border: 2px solid var(--white);
+      border-radius: 999px;
+      padding: 7px 20px;
+      color: var(--white);
+      font-size: .95rem;
+      font-weight: 500;
+      cursor: default;
+    }
+    .badge-dot {
+      width: 14px; height: 14px;
+      background: var(--white);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── PAGE ── */
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 100px 2rem 4rem;
+    }
+
+    /* ── QUOTE ── */
+    .quote-block {
+      position: relative;
+      padding: 1.5rem 3rem 2.5rem 3rem;
+      margin-bottom: 2.8rem;
+      animation: fadeUp .7s .1s both;
+    }
+
+    .quote-mark {
+      font-family: 'DM Serif Display', serif;
+      font-size: 6rem;
+      color: var(--text-muted);
+      line-height: 0.6;
+      opacity: 0.6;
+      display: block;
+    }
+    .quote-mark.open  { text-align: left;  margin-bottom: .5rem; }
+    .quote-mark.close { text-align: right; margin-top: .5rem; }
+
+    .quote-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.3rem, 2.8vw, 1.85rem);
+      color: var(--text-muted);
+      line-height: 1.5;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── EXPERIENCE CARD ── */
+    .exp-card {
+      border: 2px solid var(--green-mid);
+      border-radius: 22px;
+      padding: 2rem 2.4rem;
+      margin-bottom: 2rem;
+      background: transparent;
+      animation: fadeUp .7s both;
+    }
+    .exp-card:nth-child(2) { animation-delay: .2s; }
+    .exp-card:nth-child(3) { animation-delay: .35s; }
+
+    .exp-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      color: var(--text-dark);
+      margin-bottom: .6rem;
+    }
+
+    .exp-meta {
+      display: flex;
+      gap: 3rem;
+      font-size: .97rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 1.1rem;
+    }
+
+    .exp-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+    }
+    .exp-list li {
+      font-size: 1rem;
+      color: var(--text-dark);
+      line-height: 1.6;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+    .exp-list li::before {
+      content: '-';
+      position: absolute;
+      left: 0;
+      color: var(--text-dark);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="nav-logo" href="index.html">
+      <div class="logo-icon"><img src="assets/logo.png" alt="Logo"/></div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html" class="active">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-badge">
+      <div class="badge-dot"></div>
+      Open To Work
+    </div>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <main class="page">
+
+    <!-- Quote -->
+    <div class="quote-block">
+      <span class="quote-mark open">"</span>
+      <p class="quote-text">Every experience has a story and a lesson in it. Here is<br>my journey in the world of working experience</p>
+      <span class="quote-mark close">"</span>
+    </div>
+
+    <!-- Card 1: Assistant Lecturer -->
+    <div class="exp-card">
+      <h2 class="exp-title">Assistant Lecturer</h2>
+      <div class="exp-meta">
+        <span>Universitas Pakuan</span>
+        <span>March 2024 - Now</span>
+      </div>
+      <ul class="exp-list">
+        <li>Guided 20–30+ students per session in operating software systems and lab tools</li>
+        <li>Prepared practical modules, structured documentation, and assessment rubrics</li>
+        <li>Provided technical troubleshooting support during laboratory sessions</li>
+        <li>Managed class data, schedules, and grading records using digital tools</li>
+      </ul>
+    </div>
+
+    <!-- Card 2: General Affairs Intern -->
+    <div class="exp-card">
+      <h2 class="exp-title">General Affairs Intern</h2>
+      <div class="exp-meta">
+        <span>DPRD Kota Bogor</span>
+        <span>July 2025 - September 2025</span>
+      </div>
+      <ul class="exp-list">
+        <li>Built an internal web-based system to document and track daily intern activities and reports</li>
+        <li>Managed and digitized official government archives and administrative records</li>
+        <li>Processed operational data to support divisional workflows and reporting</li>
+      </ul>
+    </div>
+
+  </main>
+
+</body>
+</html>
