@@ -153,25 +153,39 @@
       margin-top: 1.2rem;
     }
 
-    /* ── SKILLS ── */
+    /* ── SKILLS SLIDER ── */
     .skills-section {
       margin-bottom: 3rem;
       animation: fadeUp .7s .4s both;
     }
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
+    .slider-wrap {
+      position: relative;
       margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .9rem;
     }
 
-    .skill-card {
+    .slider-viewport {
+      overflow: hidden;
+      flex: 1;
+      border-radius: 20px;
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform .5s ease;
+    }
+
+    .slide {
+      flex: 0 0 100%;
       background: var(--green-card);
       border-radius: 20px;
       padding: 1.6rem 1.8rem;
+      box-sizing: border-box;
     }
-    .skill-card h3 {
+    .slide h3 {
       font-family: 'DM Serif Display', serif;
       font-size: 1.25rem;
       color: var(--text-dark);
@@ -192,6 +206,44 @@
       font-size: .92rem;
       color: var(--text-dark);
       font-weight: 500;
+    }
+
+    .slider-btn {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--green-dark);
+      background: transparent;
+      color: var(--green-dark);
+      font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background .2s, color .2s, transform .15s;
+    }
+    .slider-btn:hover {
+      background: var(--green-dark);
+      color: var(--white);
+      transform: scale(1.06);
+    }
+
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: .55rem;
+      margin-top: 1rem;
+    }
+    .dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--green-card);
+      border: 1.5px solid var(--green-dark);
+      cursor: pointer;
+      padding: 0;
+      transition: background .2s, transform .15s;
+    }
+    .dot.active {
+      background: var(--green-dark);
+      transform: scale(1.15);
     }
 
     /* ── CTA ── */
@@ -267,7 +319,7 @@
     <div class="header-row">
       <div class="header-text">
         <h1>Sahda Rahani Susilawati</h1>
-        <p class="subtitle">— Computer Science Student<span>·</span>Universitas Pakuan<span>·</span>2026</p>
+        <p class="subtitle">— Computer Science Graduate | Aspiring Software Engineer | AI, Computer Vision & Mobile Development</p>
       </div>
       <div class="avatar-box">
         <img src="assets/sahda.png" alt="Sahda Rahani Susilawati"/>
@@ -277,43 +329,86 @@
     <!-- About Me -->
     <h2 class="section-title">About Me</h2>
     <div class="about-card">
-      <p>I'm a final-year Computer Science student passionate about the intersection of design and AI. My thesis is an end-to-end egg quality classification system — CNN model training with Python &amp; OpenCV, converted to TFLite, with a full UI/UX design process in Figma from user research to interactive prototype.</p>
-      <p>I've worked 2+ years as an Assistant Lecturer, interned at a government institution where I built an internal web documentation system, and created educational content remotely. I value clarity, user-centered thinking, and practical outcomes.</p>
+      <p>Hi, I'm Sahda Rahani Susilawati, a fresh graduate in Computer Science from Universitas Pakuan who enjoys building technology that solves real-world problems.</p>
+      <p>I have experience developing software from idea to deployment, combining software engineering, UI/UX design, and AI/computer vision into complete end-to-end applications.</p>
+      <p>During my academic journey, I worked as an Assistant Lecturer for more than two years while also building various web and mobile applications, including internal information systems, internship management systems, and my CNN-based thesis application for automated egg quality inspection.</p>
+      <p>Rather than focusing on only one specialization, I enjoy understanding how every part of a product works—from designing interfaces, developing applications, integrating APIs, building machine learning models, to deploying the final system.</p>
+      <p>I'm currently looking for opportunities as a:</p>
+      <p>• Software Engineer (Entry Level)</p>
+      <p>• Mobile Developer</p>
+      <p>• AI / Computer Vision Engineer (Entry Level)</p>
+      <p>• UI/UX Designer</p>
+      <p>and I'm always excited to learn new technologies while building products that create real impact.</p>
     </div>
 
-    <!-- Skills -->
+    <!-- Skills Slider -->
     <section class="skills-section">
       <h2 class="section-title">Skills</h2>
-      <div class="skills-grid">
 
-        <div class="skill-card">
-          <h3>Design</h3>
-          <div class="tags">
-            <span class="tag">Figma</span>
-            <span class="tag">Wireframe</span>
-            <span class="tag">Prototyping</span>
-            <span class="tag">User Persona</span>
-            <span class="tag">UX Research</span>
+      <div class="slider-wrap">
+        <button class="slider-btn" id="prevBtn" aria-label="Previous">&#10094;</button>
+
+        <div class="slider-viewport">
+          <div class="slider-track" id="sliderTrack">
+
+            <div class="slide">
+              <h3>Software Development</h3>
+              <div class="tags">
+                <span class="tag">Flutter</span>
+                <span class="tag">Dart</span>
+                <span class="tag">Laravel</span>
+                <span class="tag">REST API</span>
+                <span class="tag">Git</span>
+                <span class="tag">GitHub</span>
+              </div>
+            </div>
+
+            <div class="slide">
+              <h3>AI &amp; Computer Vision</h3>
+              <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">TensorFlow</span>
+                <span class="tag">OpenCV</span>
+                <span class="tag">MobileNetV2</span>
+                <span class="tag">CNN</span>
+                <span class="tag">Transfer Learning</span>
+              </div>
+            </div>
+
+            <div class="slide">
+              <h3>UI / UX</h3>
+              <div class="tags">
+                <span class="tag">Figma</span>
+                <span class="tag">Wireframing</span>
+                <span class="tag">Prototyping</span>
+                <span class="tag">User Research</span>
+                <span class="tag">Usability Testing</span>
+              </div>
+            </div>
+
+            <div class="slide">
+              <h3>Other</h3>
+              <div class="tags">
+                <span class="tag">Data Management</span>
+                <span class="tag">Documentation</span>
+                <span class="tag">Problem Solving</span>
+                <span class="tag">Assistant Teaching</span>
+                <span class="tag">Technical Communication</span>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <div class="skill-card">
-          <h3>AI &amp; Data</h3>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">OpenCV</span>
-            <span class="tag">CNN - Keras</span>
-            <span class="tag">TFLite</span>
-            <span class="tag">Data Management</span>
-          </div>
-        </div>
-
+        <button class="slider-btn" id="nextBtn" aria-label="Next">&#10095;</button>
       </div>
+
+      <div class="slider-dots" id="sliderDots"></div>
     </section>
 
     <!-- CTA -->
     <div class="cta-section">
-      <p>Interested in working together or having a fun chat about a project?<br>Let's connect!</p>
+      <p>Let's build meaningful technology together.</p>
       <div class="cta-buttons">
         <a class="btn" href="projects.html">View My Project</a>
         <a class="btn" href="contact.html">Contact Me</a>
@@ -321,6 +416,62 @@
     </div>
 
   </main>
+
+  <script>
+    (function () {
+      const track = document.getElementById('sliderTrack');
+      const slides = track.children;
+      const dotsWrap = document.getElementById('sliderDots');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const total = slides.length;
+      let current = 0;
+      let autoTimer = null;
+      const AUTO_DELAY = 4000; // ganti angka ini (ms) untuk mengatur kecepatan slide otomatis
+
+      // buat dots
+      for (let i = 0; i < total; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(dot);
+      }
+      const dots = dotsWrap.children;
+
+      function update() {
+        track.style.transform = `translateX(-${current * 100}%)`;
+        for (let i = 0; i < dots.length; i++) {
+          dots[i].classList.toggle('active', i === current);
+        }
+      }
+
+      function goTo(index) {
+        current = (index + total) % total;
+        update();
+        restartAuto();
+      }
+
+      function next() { goTo(current + 1); }
+      function prev() { goTo(current - 1); }
+
+      function startAuto() {
+        autoTimer = setInterval(() => {
+          current = (current + 1) % total;
+          update();
+        }, AUTO_DELAY);
+      }
+      function restartAuto() {
+        clearInterval(autoTimer);
+        startAuto();
+      }
+
+      nextBtn.addEventListener('click', next);
+      prevBtn.addEventListener('click', prev);
+
+      startAuto();
+    })();
+  </script>
 
 </body>
 </html>
