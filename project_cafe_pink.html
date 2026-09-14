@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cafe Pink – Sahda Rahani Susilawati</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green-dark:  #5a6e3f;
+      --green-mid:   #6e7f4e;
+      --green-card:  #b8c99a;
+      --green-bg:    #d4e3b5;
+      --green-tag:   #c8d9a8;
+      --white:       #ffffff;
+      --text-dark:   #3d4a2e;
+      --text-muted:  #6b7a56;
+      --nav-h: 68px;
+    }
+
+    html, body {
+      width: 100%;
+      background: var(--green-bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-dark);
+    }
+
+    /* ── NAVBAR (sama seperti halaman lain) ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--green-dark);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      height: var(--nav-h);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo .logo-icon { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; }
+    .nav-logo .logo-icon img { width: 100%; height: 100%; object-fit: contain; }
+    .nav-links { display: flex; gap: 1.7rem; list-style: none; flex-wrap: wrap; }
+    .nav-links a {
+      color: var(--white); text-decoration: none; font-size: .95rem; font-weight: 500;
+      letter-spacing: 0.01em; transition: opacity .2s; padding-bottom: 4px; white-space: nowrap;
+    }
+    .nav-links a:hover { opacity: .7; }
+    .nav-links a.active { border-bottom: 2px solid var(--white); }
+
+    .work-switch { display: flex; align-items: center; gap: 10px; }
+    .work-switch .switch-track {
+      position: relative; width: 42px; height: 22px; background: #dff0c4;
+      border: 2px solid var(--white); border-radius: 999px; flex-shrink: 0;
+    }
+    .work-switch .switch-knob {
+      position: absolute; top: 1px; right: 1px; width: 14px; height: 14px;
+      background: var(--white); border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
+      animation: pulseKnob 2.4s ease-in-out infinite;
+    }
+    @keyframes pulseKnob {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
+      50%      { box-shadow: 0 0 0 6px rgba(255,255,255,0.12); }
+    }
+    .work-switch .switch-label { color: var(--white); font-size: .95rem; font-weight: 500; white-space: nowrap; }
+
+    /* ── PAGE ── */
+    .page { max-width: 920px; margin: 0 auto; padding: calc(var(--nav-h) + 2rem) 2rem 4rem; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--text-dark); text-decoration: none; font-weight: 700; font-size: .95rem;
+      margin-bottom: 1.6rem;
+    }
+    .back-link:hover { opacity: .75; }
+    .back-link svg { width: 16px; height: 16px; }
+
+    /* ── HEADER ── */
+    .proj-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.1rem; }
+    .proj-icon {
+      flex-shrink: 0; width: 54px; height: 54px; border-radius: 14px;
+      background: var(--green-card); display: flex; align-items: center; justify-content: center;
+    }
+    .proj-icon svg { width: 26px; height: 26px; color: var(--text-dark); }
+    .proj-header h1 {
+      font-family: 'DM Serif Display', serif; font-size: clamp(1.7rem, 4vw, 2.2rem); color: var(--text-dark);
+    }
+    .proj-header .proj-sub { font-size: .95rem; color: var(--text-muted); margin-top: .15rem; }
+
+    .proj-tags { display: flex; gap: .7rem; flex-wrap: wrap; margin-bottom: 2.2rem; }
+    .tag-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--green-card); color: var(--text-dark);
+      font-size: .85rem; font-weight: 600;
+      padding: 7px 16px; border-radius: 999px;
+    }
+    .tag-pill.outline { background: var(--green-tag); }
+    .tag-pill svg { width: 14px; height: 14px; }
+
+    /* ── BODY: mockup + info ── */
+    .proj-body { display: flex; gap: 2.4rem; margin-bottom: 2.6rem; flex-wrap: wrap; }
+
+    .phone-mockup {
+      flex-shrink: 0; width: 220px; margin: 0 auto;
+      background: #23291b; border-radius: 30px; padding: 12px 10px;
+      box-shadow: 0 10px 22px rgba(61,74,46,0.22);
+    }
+    .phone-mockup .notch {
+      width: 46px; height: 6px; background: #444; border-radius: 4px;
+      margin: 0 auto 8px;
+    }
+    .phone-mockup .screen {
+      border-radius: 18px; overflow: hidden; background: var(--white);
+      aspect-ratio: 9 / 18.5;
+    }
+    .phone-mockup .screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .proj-info { flex: 1; min-width: 240px; }
+    .proj-info h2 {
+      font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--text-dark);
+      margin-bottom: .5rem;
+    }
+    .proj-info section + section { margin-top: 1.4rem; }
+    .proj-info p { font-size: .92rem; line-height: 1.65; color: var(--text-muted); max-width: 46ch; }
+
+    .chip-row { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .chip {
+      background: var(--white); color: var(--text-dark);
+      font-size: .85rem; font-weight: 600;
+      padding: 6px 16px; border-radius: 999px;
+    }
+
+    /* ── FEATURES / OUTCOME / BUTTONS ── */
+    .proj-columns {
+      display: flex; gap: 2.5rem; flex-wrap: wrap; align-items: flex-start;
+      padding-top: 1.8rem; border-top: 1px solid rgba(61,74,46,0.15);
+    }
+    .proj-columns > div { flex: 1; min-width: 200px; }
+    .proj-columns h2 {
+      font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--text-dark);
+      margin-bottom: .9rem;
+    }
+    .diamond-list { list-style: none; }
+    .diamond-list li {
+      position: relative; padding-left: 1.3rem; margin-bottom: .7rem;
+      font-size: .92rem; color: var(--text-dark);
+    }
+    .diamond-list li::before {
+      content: "◆"; position: absolute; left: 0; top: 1px;
+      font-size: .65rem; color: var(--green-mid);
+    }
+
+    .proj-buttons { display: flex; flex-direction: column; gap: .8rem; flex: 0 0 auto; min-width: 190px; }
+    .proj-btn {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 12px 20px; border-radius: 999px;
+      font-size: .92rem; font-weight: 600; text-decoration: none;
+      transition: transform .15s ease, opacity .2s ease;
+    }
+    .proj-btn:hover { transform: translateY(-2px); opacity: .92; }
+    .proj-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .proj-btn.solid { background: var(--green-dark); color: var(--white); }
+    .proj-btn.ghost { background: var(--green-tag); color: var(--text-dark); }
+
+    @media (max-width: 560px) {
+      .proj-columns { flex-direction: column; }
+      .proj-buttons { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="nav-logo" href="index.html">
+      <div class="logo-icon"><img src="assets/logo.png" alt="Logo"/></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="education.html">Education</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="experiences.html">Experiences</a></li>
+      <li><a href="organization.html">Organization</a></li>
+      <li><a href="project.html" class="active">Project</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="work-switch" role="status" aria-label="Status: Open to Work, aktif">
+      <div class="switch-track"><div class="switch-knob"></div></div>
+      <span class="switch-label">Open To Work</span>
+    </div>
+  </nav>
+
+  <main class="page">
+
+    <a class="back-link" href="project.html">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 12H5m0 0l6-6m-6 6l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Projects
+    </a>
+
+    <div class="proj-header">
+      <div class="proj-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9h13a3 3 0 013 3 3 3 0 01-3 3H3V9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M16 10.5h1.5a1.5 1.5 0 010 3H16" stroke="currentColor" stroke-width="1.6"/><path d="M3 18h13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6 6.5V9M9 6.5V9M12 6.5V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <h1>Cafe Pink</h1>
+        <p class="proj-sub">Food &amp; Beverage Mobile Application</p>
+      </div>
+    </div>
+
+    <div class="proj-tags">
+      <span class="tag-pill">Software Development</span>
+      <span class="tag-pill outline">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Personal Project
+      </span>
+    </div>
+
+    <div class="proj-body">
+      <div class="phone-mockup">
+        <div class="notch"></div>
+        <div class="screen">
+          <img src="assets/Home Page.png" alt="Tampilan Homepage Cafe Pink"/>
+        </div>
+      </div>
+
+      <div class="proj-info">
+        <section>
+          <h2>Overview</h2>
+          <p>Cafe Pink is a frontend mobile application developed using Flutter and Dart based on the Bite of Happiness UI/UX design. The project focuses on translating the designed interface into a functional mobile experience for browsing products and navigating through the ordering flow.</p>
+        </section>
+        <section>
+          <h2>My Role</h2>
+          <p>Frontend Developer — implemented the mobile interface based on the provided UI/UX design using Flutter and Dart, including screen layouts, navigation, and interactive interface elements.</p>
+        </section>
+        <section>
+          <h2>Tech Stack</h2>
+          <div class="chip-row">
+            <span class="chip">Flutter</span>
+            <span class="chip">Dart</span>
+            <span class="chip">Figma</span>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="proj-columns">
+      <div>
+        <h2>Features</h2>
+        <ul class="diamond-list">
+          <li>Login</li>
+          <li>Homepage</li>
+          <li>Search</li>
+          <li>Product &amp; category browsing</li>
+          <li>Shopping cart</li>
+          <li>Notifications</li>
+          <li>Profile</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Outcome</h2>
+        <ul class="diamond-list">
+          <li>Successfully translated the UI/UX design into a functional mobile interface</li>
+          <li>Practiced implementing multi-screen mobile interfaces using Flutter and Dart</li>
+          <li>Strengthened frontend development and UI implementation skills</li>
+        </ul>
+      </div>
+      <div class="proj-buttons">
+        <a class="proj-btn ghost" href="#">
+          View GitHub
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H8m9 0v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>
