@@ -1,201 +1,196 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Projects</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet"/>
+  <title>My Projects – Sahda Rahani Susilawati</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #c8d5b0;
-      --nav-bg: #4a5e3a;
-      --nav-text: #d6e4c0;
-      --text-dark: #3d4f30;
-      --text-muted: #5a6e4a;
-      --btn-bg: #b5c49a;
-      --btn-shadow: #a0b085;
-      --btn-text: #3d4f30;
-      --toggle-bg: #c8d5b0;
-      --toggle-knob: #d6e4c0;
+      --green-dark:  #5a6e3f;
+      --green-mid:   #6e7f4e;
+      --green-card:  #b8c99a;
+      --green-bg:    #d4e3b5;
+      --green-tag:   #c8d9a8;
+      --olive:       #b7ae63;
+      --road:        #75875c;
+      --white:       #ffffff;
+      --text-dark:   #3d4a2e;
+      --text-muted:  #6b7a56;
+      --nav-h: 68px;
     }
 
-    body {
-      font-family: 'Lora', serif;
-      background-color: var(--bg);
-      min-height: 100vh;
-    }
-
-    /* ── NAVBAR ── */
-    nav {
-      background-color: var(--nav-bg);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      height: 68px;
-    }
-
-    .nav-logo img {
-      height: 44px;
-      width: auto;
-      display: block;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 48px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--nav-text);
-      text-decoration: none;
-      font-family: 'Lora', serif;
-      font-size: 1.05rem;
-      font-weight: 400;
-      letter-spacing: 0.01em;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: #ffffff;
-    }
-
-    .nav-links a.active {
-      border-bottom: 2px solid var(--nav-text);
-      padding-bottom: 2px;
-    }
-
-    /* Open To Work pill */
-    .open-to-work {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border: 1.5px solid var(--nav-text);
-      border-radius: 999px;
-      padding: 7px 20px;
-      color: var(--nav-text);
-      font-family: 'Lora', serif;
-      font-size: 0.92rem;
-      letter-spacing: 0.01em;
-      cursor: default;
-      user-select: none;
-    }
-
-    .toggle-track {
-      width: 32px;
-      height: 18px;
-      background: var(--toggle-bg);
-      border-radius: 999px;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .toggle-knob {
-      width: 14px;
-      height: 14px;
-      background: var(--toggle-knob);
-      border-radius: 50%;
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-    }
-
-    /* ── MAIN CONTENT ── */
-    main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 60px 40px 80px;
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.2rem, 7vw, 5.2rem);
-      font-weight: 500;
+    html { scroll-behavior: smooth; }
+    html, body {
+      width: 100%;
+      background: var(--green-bg);
+      font-family: 'DM Sans', sans-serif;
       color: var(--text-dark);
-      letter-spacing: 0.01em;
-      text-align: center;
-      margin-bottom: 28px;
-      /* Embossed / recessed effect matching the screenshot */
-      text-shadow:
-        2px 2px 4px rgba(255,255,255,0.35),
-        -1px -1px 3px rgba(0,0,0,0.18);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
 
-    .subtitle {
-      font-family: 'Lora', serif;
-      font-size: 1.08rem;
-      font-weight: 400;
-      color: var(--text-muted);
-      text-align: center;
-      max-width: 760px;
-      line-height: 1.75;
-      margin-bottom: 52px;
+    /* ── NAVBAR (sama seperti halaman lain) ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--green-dark);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      height: var(--nav-h);
     }
-
-    /* ── PROJECT BUTTONS ── */
-    .project-buttons {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-      justify-content: center;
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo .logo-icon { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; }
+    .nav-logo .logo-icon img { width: 100%; height: 100%; object-fit: contain; }
+    .nav-links { display: flex; gap: 1.7rem; list-style: none; flex-wrap: wrap; }
+    .nav-links a {
+      color: var(--white); text-decoration: none; font-size: .95rem; font-weight: 500;
+      letter-spacing: 0.01em; transition: opacity .2s; padding-bottom: 4px; white-space: nowrap;
     }
+    .nav-links a:hover { opacity: .7; }
+    .nav-links a.active { border-bottom: 2px solid var(--white); }
 
-    .project-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--btn-bg);
-      color: var(--btn-text);
-      font-family: 'Lora', serif;
-      font-size: 1.15rem;
-      font-weight: 400;
-      text-decoration: none;
-      padding: 18px 36px;
+    .work-switch { display: flex; align-items: center; gap: 10px; }
+    .work-switch .switch-track {
+      position: relative; width: 42px; height: 22px; background: #dff0c4;
+      border: 2px solid var(--white); border-radius: 999px; flex-shrink: 0;
+    }
+    .work-switch .switch-knob {
+      position: absolute; top: 1px; right: 1px; width: 14px; height: 14px;
+      background: var(--white); border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
+      animation: pulseKnob 2.4s ease-in-out infinite;
+    }
+    @keyframes pulseKnob {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
+      50%      { box-shadow: 0 0 0 6px rgba(255,255,255,0.12); }
+    }
+    .work-switch .switch-label { color: var(--white); font-size: .95rem; font-weight: 500; white-space: nowrap; }
+
+    /* ── PAGE ── */
+    .page { max-width: 860px; margin: 0 auto; padding: calc(var(--nav-h) + 2.2rem) 2rem 4rem; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    /* ── HEADER ── */
+    .proj-header { position: relative; display: flex; gap: 1.1rem; align-items: flex-start; margin-bottom: 2.4rem; }
+    .proj-header-icon {
+      flex-shrink: 0; width: 52px; height: 52px; border-radius: 14px;
+      background: var(--green-card);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .proj-header-icon svg { width: 26px; height: 26px; color: var(--green-dark); }
+    .proj-header-text h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.1rem);
+      color: var(--text-dark);
+      margin-bottom: .35rem;
+    }
+    .proj-header-text .lead { font-size: .95rem; font-weight: 500; color: var(--text-dark); margin-bottom: .55rem; }
+    .proj-header-text p.desc { font-size: .88rem; line-height: 1.65; color: var(--text-muted); max-width: 56ch; }
+
+    .sparkle { position: absolute; color: var(--olive); opacity: .75; }
+    .sparkle.s1 { top: -6px; right: 20px; width: 24px; height: 24px; }
+    .sparkle.s2 { top: 40px; right: -4px; width: 14px; height: 14px; }
+
+    /* ── CATEGORY GRID ── */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1rem;
+      margin-bottom: 1.6rem;
+    }
+    .cat-card {
+      position: relative;
+      background: var(--green-card);
       border-radius: 18px;
-      /* Neumorphic inset shadow to match the screenshot */
-      box-shadow:
-        4px 4px 10px rgba(0,0,0,0.15),
-        -2px -2px 6px rgba(255,255,255,0.35),
-        inset 1px 1px 3px rgba(255,255,255,0.25),
-        inset -1px -1px 3px rgba(0,0,0,0.08);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-      cursor: pointer;
-      min-width: 240px;
+      padding: 1.3rem 1.4rem;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .cat-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(61,74,46,0.2); }
+    .cat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.7rem;
+      color: var(--green-mid);
+      opacity: .8;
+      margin-bottom: .3rem;
+    }
+    .cat-icon {
+      position: absolute; top: 1.1rem; right: 1.2rem;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 6px rgba(61,74,46,0.15);
+    }
+    .cat-icon svg { width: 20px; height: 20px; color: var(--green-dark); }
+    .cat-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--text-dark); margin-bottom: .3rem; }
+    .cat-sub { font-size: .84rem; color: var(--text-muted); margin-bottom: .9rem; }
+    .cat-link {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-size: .85rem; font-weight: 600; color: var(--green-dark);
+      text-decoration: none;
+    }
+    .cat-link svg { width: 14px; height: 14px; transition: transform .2s ease; }
+    .cat-link:hover svg { transform: translateX(3px); }
+
+    @media (max-width: 620px) {
+      .cat-grid { grid-template-columns: 1fr; }
     }
 
-    .project-btn:hover {
-      transform: translateY(-2px);
-      box-shadow:
-        6px 6px 14px rgba(0,0,0,0.18),
-        -3px -3px 8px rgba(255,255,255,0.4),
-        inset 1px 1px 3px rgba(255,255,255,0.25),
-        inset -1px -1px 3px rgba(0,0,0,0.08);
+    /* ── FEATURED PROJECT ── */
+    .featured-card {
+      background: var(--green-card);
+      border-radius: 20px;
+      padding: 1.5rem 1.7rem;
+      display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .featured-images-left { display: flex; gap: .6rem; flex-shrink: 0; }
+    .featured-images-left img {
+      border-radius: 10px; object-fit: cover;
+      box-shadow: 0 6px 14px rgba(61,74,46,0.22);
+    }
+    .featured-images-left img.img-a { width: 66px; height: 120px; }
+    .featured-images-left img.img-b { width: 92px; height: 120px; }
+
+    .featured-text { flex: 1; min-width: 220px; }
+    .featured-label { font-size: .78rem; font-weight: 700; letter-spacing: .08em; color: var(--green-dark); margin-bottom: .3rem; }
+    .featured-title { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: .7rem; }
+    .featured-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
+    .tag {
+      background: var(--white);
+      color: var(--text-dark);
+      font-size: .8rem; font-weight: 500;
+      padding: .35rem .8rem; border-radius: 999px;
+      white-space: nowrap;
+      box-shadow: 0 1px 3px rgba(61,74,46,0.12);
+    }
+    .view-project-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--green-dark); color: var(--white);
+      padding: .55rem 1.15rem; border-radius: 999px;
+      font-size: .85rem; font-weight: 600;
+      text-decoration: none;
+      transition: transform .18s ease, background .18s ease;
+    }
+    .view-project-btn:hover { background: var(--text-dark); transform: translateY(-2px); }
+    .view-project-btn svg { width: 14px; height: 14px; }
+
+    .featured-image-right { width: 180px; flex-shrink: 0; }
+    .featured-image-right img {
+      width: 100%; aspect-ratio: 1/1; object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 8px 18px rgba(61,74,46,0.25);
     }
 
-    .project-btn:active {
-      transform: translateY(0);
-      box-shadow:
-        2px 2px 6px rgba(0,0,0,0.15),
-        -1px -1px 3px rgba(255,255,255,0.3),
-        inset 2px 2px 5px rgba(0,0,0,0.1),
-        inset -1px -1px 3px rgba(255,255,255,0.2);
-    }
-
-    /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
-      nav { padding: 0 18px; }
-      .nav-links { gap: 22px; }
-      .project-buttons { flex-direction: column; align-items: center; }
-      .project-btn { min-width: 80vw; }
+      .featured-card { justify-content: center; }
+      .featured-images-left { order: 1; }
+      .featured-text { order: 3; width: 100%; }
+      .featured-image-right { order: 2; }
     }
   </style>
 </head>
@@ -203,41 +198,141 @@
 
   <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="nav-logo">
-      <img src="assets/logo.png" alt="Logo" onerror="this.style.display='none'"/>
+    <a class="nav-logo" href="index.html">
+      <div class="logo-icon"><img src="assets/logo.png" alt="Logo"/></div>
     </a>
-
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
-      <li><a href="experience.html">Experience</a></li>
-      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="education.html">Education</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="experiences.html">Experiences</a></li>
+      <li><a href="organization.html">Organization</a></li>
+      <li><a href="project.html" class="active">Project</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-
-    <div class="open-to-work">
-      <span class="toggle-track">
-        <span class="toggle-knob"></span>
-      </span>
-      Open To Work
+    <div class="work-switch" role="status" aria-label="Status: Open to Work, aktif">
+      <div class="switch-track"><div class="switch-knob"></div></div>
+      <span class="switch-label">Open To Work</span>
     </div>
   </nav>
 
-  <!-- MAIN -->
-  <main>
-    <h1>My Projects</h1>
+  <main class="page">
 
-    <p class="subtitle">
-      Here are some of the projects I've worked on, both independently and as part of a
-      team. Each project helped me learn, explore, and grow as a Computer Science
-      student and creative thinker.
-    </p>
+    <!-- Header -->
+    <section class="reveal proj-header">
+      <span class="proj-header-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+      </span>
+      <div class="proj-header-text">
+        <h1>My Projects</h1>
+        <p class="lead">Turning ideas into digital solutions.</p>
+        <p class="desc">A collection of my work across software development, AI &amp; computer vision, data &amp; machine learning, and UI/UX design — from academic projects, internship projects, and my undergraduate thesis.</p>
+      </div>
 
-    <div class="project-buttons">
-      <a href="projects_campus.html" class="project-btn">Project Campus</a>
-      <a href="projects_internship.html" class="project-btn">Project - Internship</a>
-      <a href="projects_thesis.html" class="project-btn">Project - Thesis</a>
-    </div>
+      <svg class="sparkle s1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg>
+      <svg class="sparkle s2" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg>
+    </section>
+
+    <!-- Category Grid -->
+    <section class="reveal cat-grid">
+
+      <div class="cat-card">
+        <span class="cat-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="12" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M2 19h20l-1.5-3h-17L2 19z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </span>
+        <div class="cat-number">01</div>
+        <h2 class="cat-title">Software Development</h2>
+        <p class="cat-sub">Web &amp; Mobile Applications</p>
+        <a class="cat-link" href="#software-projects">
+          5+ Projects
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="cat-card">
+        <span class="cat-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+        </span>
+        <div class="cat-number">02</div>
+        <h2 class="cat-title">AI &amp; Computer Vision</h2>
+        <p class="cat-sub">Intelligent Image-Based Solutions</p>
+        <a class="cat-link" href="#ai-projects">
+          2+ Projects
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="cat-card">
+        <span class="cat-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="12" cy="6" rx="8" ry="3" stroke="currentColor" stroke-width="1.6"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
+        <div class="cat-number">03</div>
+        <h2 class="cat-title">Data &amp; Machine Learning</h2>
+        <p class="cat-sub">Data Analysis &amp; Predictive Modeling</p>
+        <a class="cat-link" href="#data-projects">
+          3+ Projects
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="cat-card">
+        <span class="cat-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20l1.2-4.2L15 6l3 3-9.8 9.8L4 20z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 8l3 3" stroke="currentColor" stroke-width="1.6"/></svg>
+        </span>
+        <div class="cat-number">04</div>
+        <h2 class="cat-title">UI/UX Design</h2>
+        <p class="cat-sub">Interfaces &amp; Digital Experiences</p>
+        <a class="cat-link" href="#design-projects">
+          4+ Projects
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </section>
+
+    <!-- Featured Project -->
+    <section class="reveal featured-card">
+      <div class="featured-images-left">
+        <img class="img-a" src="assets/project-egg-app1.jpg" alt="Tampilan aplikasi EggCheck di ponsel"/>
+        <img class="img-b" src="assets/project-egg-app2.jpg" alt="Tampilan aplikasi EggCheck di tablet"/>
+      </div>
+
+      <div class="featured-text">
+        <p class="featured-label">FEATURED PROJECT</p>
+        <h2 class="featured-title">Egg Crack Detection</h2>
+        <div class="featured-tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">Dart</span>
+          <span class="tag">TensorFlow Lite</span>
+          <span class="tag">OpenCV</span>
+        </div>
+        <a class="view-project-btn" href="#" target="_blank" rel="noopener">
+          View Project
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="featured-image-right">
+        <img src="assets/project-egg-device.jpg" alt="Perangkat deteksi keretakan telur EggCheck"/>
+      </div>
+    </section>
+
   </main>
+
+  <script>
+    (function () {
+      const revealEls = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      revealEls.forEach((el) => io.observe(el));
+    })();
+  </script>
 
 </body>
 </html>
