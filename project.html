@@ -130,10 +130,14 @@
     .cat-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--text-dark); margin-bottom: .3rem; }
     .cat-sub { font-size: .84rem; color: var(--text-muted); margin-bottom: .9rem; }
     .cat-link {
-      display: inline-flex; align-items: center; gap: .35rem;
-      font-size: .85rem; font-weight: 600; color: var(--green-dark);
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: var(--green-dark); color: var(--white);
+      font-size: .82rem; font-weight: 600;
+      padding: .5rem 1.05rem; border-radius: 999px;
       text-decoration: none;
+      transition: background .18s ease, transform .18s ease;
     }
+    .cat-link:hover { background: var(--text-dark); transform: translateY(-2px); }
     .cat-link svg { width: 14px; height: 14px; transition: transform .2s ease; }
     .cat-link:hover svg { transform: translateX(3px); }
 
@@ -243,7 +247,7 @@
         <div class="cat-number">01</div>
         <h2 class="cat-title">Software Development</h2>
         <p class="cat-sub">Web &amp; Mobile Applications</p>
-        <a class="cat-link" href="software_projects">
+        <a class="cat-link" href="software_projects.html">
           5+ Projects
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
