@@ -17,7 +17,10 @@
       --white:       #ffffff;
       --text-dark:   #3d4a2e;
       --text-muted:  #6b7a56;
+      --nav-h: 68px;
     }
+
+    html { scroll-behavior: smooth; }
 
     html, body {
       width: 100%;
@@ -26,13 +29,18 @@
       color: var(--text-dark);
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+
     /* ── NAVBAR ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: var(--green-dark);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 2.5rem;
-      height: 68px;
+      height: var(--nav-h);
     }
 
     .nav-logo {
@@ -66,37 +74,54 @@
       border-bottom: 2px solid var(--white);
     }
 
-    .nav-badge {
+    /* Open to Work — switch */
+    .work-switch {
       display: flex; align-items: center; gap: 10px;
+    }
+    .work-switch .switch-track {
+      position: relative;
+      width: 42px; height: 22px;
+      background: #dff0c4;
       border: 2px solid var(--white);
       border-radius: 999px;
-      padding: 7px 20px;
-      color: var(--white);
-      font-size: .95rem;
-      font-weight: 500;
-      cursor: default;
+      flex-shrink: 0;
     }
-    .badge-dot {
+    .work-switch .switch-knob {
+      position: absolute;
+      top: 1px; right: 1px;
       width: 14px; height: 14px;
       background: var(--white);
       border-radius: 50%;
-      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
+      animation: pulseKnob 2.4s ease-in-out infinite;
+    }
+    @keyframes pulseKnob {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
+      50%      { box-shadow: 0 0 0 6px rgba(255,255,255,0.12); }
+    }
+    .work-switch .switch-label {
+      color: var(--white);
+      font-size: .95rem;
+      font-weight: 500;
+      white-space: nowrap;
     }
 
-    /* ── PAGE ── */
-    .page {
+    /* ── HERO (first screen) ── */
+    .hero {
+      min-height: calc(100vh - var(--nav-h));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       max-width: 960px;
       margin: 0 auto;
-      padding: 100px 2rem 3rem;
+      padding: calc(var(--nav-h) + 2rem) 2rem 2rem;
     }
 
-    /* ── HEADER ROW ── */
     .header-row {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 2rem;
-      margin-bottom: 2rem;
       animation: fadeUp .7s .1s both;
     }
 
@@ -116,6 +141,14 @@
     }
     .header-text .subtitle span { margin: 0 .3em; }
 
+    .header-text .tagline {
+      margin-top: 1.1rem;
+      max-width: 46ch;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--text-dark);
+    }
+
     .avatar-box {
       flex-shrink: 0;
       width: 110px; height: 110px;
@@ -128,13 +161,101 @@
       object-fit: cover;
     }
 
+    .hero-buttons {
+      display: flex;
+      gap: 1.1rem;
+      margin-top: 1.8rem;
+      flex-wrap: wrap;
+      animation: fadeUp .7s .25s both;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 2px solid var(--green-dark);
+      border-radius: 999px;
+      padding: 12px 40px;
+      font-size: 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      color: var(--green-dark);
+      background: transparent;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .22s, color .22s, transform .18s;
+    }
+    .btn:hover, .btn:focus-visible {
+      background: var(--green-dark);
+      color: var(--white);
+      transform: scale(1.04);
+    }
+    .btn-solid {
+      background: var(--green-dark);
+      color: var(--white);
+    }
+    .btn-solid:hover, .btn-solid:focus-visible {
+      background: var(--text-dark);
+      color: var(--white);
+    }
+
+    /* scroll cue */
+    .scroll-cue {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--green-dark);
+      opacity: 1;
+      transition: opacity .4s ease;
+    }
+    .scroll-cue span {
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .03em;
+      color: var(--text-muted);
+    }
+    .scroll-cue svg {
+      width: 22px; height: 22px;
+      animation: bobDown 1.6s ease-in-out infinite;
+    }
+    .scroll-cue.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    @keyframes bobDown {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(8px); }
+    }
+
+    /* ── PAGE (below the fold) ── */
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ── SECTION TITLE ── */
     .section-title {
       font-family: 'DM Serif Display', serif;
       font-size: 1.55rem;
       color: var(--green-dark);
       margin-bottom: 1rem;
-      animation: fadeUp .7s .2s both;
     }
 
     /* ── ABOUT CARD ── */
@@ -147,16 +268,14 @@
       color: var(--text-dark);
       text-align: center;
       margin-bottom: 2.8rem;
-      animation: fadeUp .7s .3s both;
     }
     .about-card p + p {
       margin-top: 1.2rem;
     }
 
-    /* ── SKILLS SLIDER ── */
+    /* ── SKILLS SLIDER (What I Do) ── */
     .skills-section {
       margin-bottom: 3rem;
-      animation: fadeUp .7s .4s both;
     }
 
     .slider-wrap {
@@ -171,7 +290,9 @@
       overflow: hidden;
       flex: 1;
       border-radius: 20px;
+      cursor: grab;
     }
+    .slider-viewport.dragging { cursor: grabbing; }
 
     .slider-track {
       display: flex;
@@ -184,6 +305,10 @@
       border-radius: 20px;
       padding: 1.6rem 1.8rem;
       box-sizing: border-box;
+      user-select: none;
+    }
+    @media (min-width: 640px) {
+      .slide { flex: 0 0 50%; }
     }
     .slide h3 {
       font-family: 'DM Serif Display', serif;
@@ -246,44 +371,84 @@
       transform: scale(1.15);
     }
 
-    /* ── CTA ── */
+    /* ── CTA / Let's Connect ── */
     .cta-section {
+      position: relative;
       text-align: center;
-      padding: 2rem 1rem 3rem;
-      animation: fadeUp .7s .5s both;
+      padding: 3rem 2rem;
+      margin: 1rem 0 3rem;
+      background: var(--green-dark);
+      border-radius: 28px;
+      overflow: hidden;
+      color: var(--white);
+    }
+    .cta-section::before {
+      content: "";
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .cta-section::after {
+      content: "";
+      position: absolute;
+      bottom: -70px; left: -40px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .cta-section h2 {
+      position: relative;
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+      margin-bottom: .7rem;
     }
     .cta-section p {
-      font-size: 1.12rem;
-      font-weight: 500;
-      color: var(--text-dark);
-      line-height: 1.5;
-      margin-bottom: 1.6rem;
+      position: relative;
+      font-size: 1.05rem;
+      color: #eef4de;
+      line-height: 1.6;
+      max-width: 46ch;
+      margin: 0 auto 1.8rem;
     }
     .cta-buttons {
+      position: relative;
       display: flex;
       justify-content: center;
       gap: 1.2rem;
       flex-wrap: wrap;
+      margin-bottom: 1.6rem;
     }
-    .btn {
-      display: inline-block;
-      border: 2px solid var(--green-dark);
-      border-radius: 999px;
-      padding: 12px 40px;
-      font-size: 1rem;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      color: var(--green-dark);
-      background: transparent;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background .22s, color .22s, transform .18s;
-    }
-    .btn:hover {
-      background: var(--green-dark);
+    .cta-section .btn {
+      border-color: var(--white);
       color: var(--white);
-      transform: scale(1.04);
     }
+    .cta-section .btn:hover, .cta-section .btn:focus-visible {
+      background: var(--white);
+      color: var(--green-dark);
+    }
+
+    .cta-social {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .cta-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      color: var(--white);
+      transition: background .2s, transform .15s, border-color .2s;
+    }
+    .cta-social a:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: var(--white);
+      transform: translateY(-3px);
+    }
+    .cta-social svg { width: 19px; height: 19px; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -306,49 +471,65 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
 
-    <div class="nav-badge">
-      <div class="badge-dot"></div>
-      Open To Work
+    <div class="work-switch" role="status" aria-label="Status: Open to Work, aktif">
+      <div class="switch-track"><div class="switch-knob"></div></div>
+      <span class="switch-label">Open To Work</span>
     </div>
   </nav>
 
-  <!-- PAGE CONTENT -->
-  <main class="page">
-
-    <!-- Header -->
+  <!-- HERO: yang pertama tampil -->
+  <section class="hero" id="hero">
     <div class="header-row">
       <div class="header-text">
         <h1>Sahda Rahani Susilawati</h1>
         <p class="subtitle">— Computer Science Graduate | Aspiring Software Engineer | AI, Computer Vision & Mobile Development</p>
+        <p class="tagline">I build digital products by combining software development, artificial intelligence, data, and user-centered design.</p>
+        <div class="hero-buttons">
+          <a class="btn btn-solid" href="projects.html">View My Project</a>
+          <a class="btn" href="contact.html">Contact Me</a>
+        </div>
       </div>
       <div class="avatar-box">
         <img src="assets/sahda.png" alt="Sahda Rahani Susilawati"/>
       </div>
     </div>
 
-    <!-- About Me -->
-    <h2 class="section-title">About Me</h2>
-    <div class="about-card">
-      <p>Hi, I'm Sahda Rahani Susilawati, a fresh graduate in Computer Science from Universitas Pakuan who enjoys building technology that solves real-world problems.</p>
-      <p>I have experience developing software from idea to deployment, combining software engineering, UI/UX design, and AI/computer vision into complete end-to-end applications.</p>
-      <p>During my academic journey, I worked as an Assistant Lecturer for more than two years while also building various web and mobile applications, including internal information systems, internship management systems, and my CNN-based thesis application for automated egg quality inspection.</p>
-      <p>Rather than focusing on only one specialization, I enjoy understanding how every part of a product works—from designing interfaces, developing applications, integrating APIs, building machine learning models, to deploying the final system.</p>
-      <p>I'm currently looking for opportunities as a:</p>
-      <p>• Software Engineer (Entry Level)</p>
-      <p>• Mobile Developer</p>
-      <p>• AI / Computer Vision Engineer (Entry Level)</p>
-      <p>• UI/UX Designer</p>
-      <p>and I'm always excited to learn new technologies while building products that create real impact.</p>
-    </div>
+    <button class="scroll-cue" id="scrollCue" aria-label="Gulir ke bawah untuk lihat selengkapnya">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 4v14m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </section>
 
-    <!-- Skills Slider -->
-    <section class="skills-section">
-      <h2 class="section-title">Skills</h2>
+  <!-- PAGE CONTENT (muncul saat scroll) -->
+  <main class="page">
+
+    <!-- About Me -->
+    <section class="reveal" id="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-card">
+        <p>Hi, I'm Sahda Rahani Susilawati, a Computer Science graduate from Universitas Pakuan with a strong interest in software engineering, artificial intelligence, data, and UI/UX design.</p>
+        <p>Throughout my studies, I worked on various projects involving web and mobile application development, machine learning, computer vision, data analysis, and interface design. I enjoy exploring the process behind a digital product — from understanding requirements and designing user flows to developing applications, integrating APIs or machine learning models, and deploying functional systems.</p>
+        <p>I have hands-on experience working with technologies such as PHP, Laravel, JavaScript, Dart, Flutter, Python, MySQL, TensorFlow, OpenCV, Flask, RapidMiner, and Figma.</p>
+        <p>I'm particularly interested in opportunities where I can continue learning, solve real-world problems, and contribute to building useful and impactful digital products.</p>
+        <p>I'm currently looking for opportunities as a:</p>
+        <p>• Software Engineer (Entry Level)</p>
+        <p>• Mobile Developer</p>
+        <p>• AI / Computer Vision Engineer (Entry Level)</p>
+        <p>• UI/UX Designer</p>
+        <p>and I'm always excited to learn new technologies while building products that create real impact.</p>
+      </div>
+    </section>
+
+    <!-- What I Do -->
+    <section class="skills-section reveal" id="skills">
+      <h2 class="section-title">What I Do</h2>
 
       <div class="slider-wrap">
-        <button class="slider-btn" id="prevBtn" aria-label="Previous">&#10094;</button>
+        <button class="slider-btn" id="prevBtn" aria-label="Sebelumnya">&#10094;</button>
 
-        <div class="slider-viewport">
+        <div class="slider-viewport" id="sliderViewport">
           <div class="slider-track" id="sliderTrack">
 
             <div class="slide">
@@ -400,54 +581,107 @@
           </div>
         </div>
 
-        <button class="slider-btn" id="nextBtn" aria-label="Next">&#10095;</button>
+        <button class="slider-btn" id="nextBtn" aria-label="Berikutnya">&#10095;</button>
       </div>
 
       <div class="slider-dots" id="sliderDots"></div>
     </section>
 
-    <!-- CTA -->
-    <div class="cta-section">
-      <p>Let's build meaningful technology together.</p>
+    <!-- Let's Connect -->
+    <section class="cta-section reveal">
+      <h2>Punya proyek menarik atau sekadar mau ngobrol?</h2>
+      <p>Aku selalu senang membahas ide baru, kolaborasi, atau peluang kerja. Jangan ragu untuk say hi!</p>
       <div class="cta-buttons">
-        <a class="btn" href="projects.html">View My Project</a>
-        <a class="btn" href="contact.html">Contact Me</a>
+        <a class="btn btn-solid" href="contact.html" style="background:var(--white); color:var(--green-dark); border-color:var(--white);">Let's Connect</a>
+        <a class="btn" href="projects.html">Lihat Proyekku</a>
       </div>
-    </div>
+      <div class="cta-social">
+        <a href="contact.html" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v12H3V6z" stroke="currentColor" stroke-width="1.6"/><path d="M3 6l9 7 9-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M7.5 10v6.5M7.5 7.5v.01M12 16.5V10M12 12.7c0-1.5 1-2.7 2.5-2.7s2 1.2 2 2.7v3.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </a>
+        <a href="#" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3a9 9 0 00-2.85 17.54c.45.08.61-.2.61-.43v-1.7c-2.5.54-3.03-1.06-3.03-1.06-.41-1.04-1-1.32-1-1.32-.82-.56.06-.55.06-.55.9.06 1.38.93 1.38.93.8 1.38 2.1.98 2.6.75.08-.58.31-.98.57-1.2-2-.23-4.1-1-4.1-4.45 0-.98.35-1.79.93-2.42-.09-.23-.4-1.15.09-2.4 0 0 .76-.24 2.5.92a8.6 8.6 0 014.55 0c1.73-1.16 2.49-.92 2.49-.92.5 1.25.19 2.17.1 2.4.58.63.92 1.44.92 2.42 0 3.46-2.11 4.22-4.12 4.44.32.28.61.83.61 1.68v2.48c0 .24.16.52.62.43A9 9 0 0012 3z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </section>
 
   </main>
 
   <script>
     (function () {
+      /* ---------- Scroll cue: bounce lalu hilang saat sudah discroll ---------- */
+      const heroSection = document.getElementById('hero');
+      const scrollCue = document.getElementById('scrollCue');
+
+      function updateScrollCue() {
+        if (window.scrollY > heroSection.offsetHeight * 0.35) {
+          scrollCue.classList.add('is-hidden');
+        } else {
+          scrollCue.classList.remove('is-hidden');
+        }
+      }
+      window.addEventListener('scroll', updateScrollCue, { passive: true });
+      updateScrollCue();
+
+      scrollCue.addEventListener('click', () => {
+        document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      /* ---------- Reveal on scroll (About Me & What I Do) ---------- */
+      const revealEls = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      revealEls.forEach((el) => io.observe(el));
+
+      /* ---------- What I Do slider: 2 kartu terlihat, auto-geser, bisa manual ---------- */
       const track = document.getElementById('sliderTrack');
+      const viewport = document.getElementById('sliderViewport');
       const slides = track.children;
       const dotsWrap = document.getElementById('sliderDots');
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
       const total = slides.length;
+
+      function visibleCount() {
+        return window.matchMedia('(min-width: 640px)').matches ? 2 : 1;
+      }
+
+      let maxIndex = Math.max(0, total - visibleCount());
       let current = 0;
       let autoTimer = null;
-      const AUTO_DELAY = 4000; // ganti angka ini (ms) untuk mengatur kecepatan slide otomatis
+      const AUTO_DELAY = 3500; // ganti angka ini (ms) untuk mengatur kecepatan geser otomatis
 
-      // buat dots
-      for (let i = 0; i < total; i++) {
+      for (let i = 0; i <= maxIndex; i++) {
         const dot = document.createElement('button');
         dot.className = 'dot' + (i === 0 ? ' active' : '');
         dot.setAttribute('aria-label', 'Slide ' + (i + 1));
         dot.addEventListener('click', () => goTo(i));
         dotsWrap.appendChild(dot);
       }
-      const dots = dotsWrap.children;
+
+      function slideWidthPercent() {
+        return 100 / visibleCount();
+      }
 
       function update() {
-        track.style.transform = `translateX(-${current * 100}%)`;
+        track.style.transform = `translateX(-${current * slideWidthPercent()}%)`;
+        const dots = dotsWrap.children;
         for (let i = 0; i < dots.length; i++) {
           dots[i].classList.toggle('active', i === current);
         }
       }
 
       function goTo(index) {
-        current = (index + total) % total;
+        current = (index + maxIndex + 1) % (maxIndex + 1);
         update();
         restartAuto();
       }
@@ -456,19 +690,83 @@
       function prev() { goTo(current - 1); }
 
       function startAuto() {
-        autoTimer = setInterval(() => {
-          current = (current + 1) % total;
-          update();
-        }, AUTO_DELAY);
+        autoTimer = setInterval(next, AUTO_DELAY);
       }
       function restartAuto() {
         clearInterval(autoTimer);
         startAuto();
       }
 
-      nextBtn.addEventListener('click', next);
-      prevBtn.addEventListener('click', prev);
+      nextBtn.addEventListener('click', () => { next(); });
+      prevBtn.addEventListener('click', () => { prev(); });
 
+      // Rebuild layout kalau ukuran layar berubah (misal jadi mobile: 1 kartu per tampilan)
+      window.addEventListener('resize', () => {
+        const newMax = Math.max(0, total - visibleCount());
+        if (newMax !== maxIndex) {
+          maxIndex = newMax;
+          current = Math.min(current, maxIndex);
+          dotsWrap.innerHTML = '';
+          for (let i = 0; i <= maxIndex; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'dot' + (i === current ? ' active' : '');
+            dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+            dot.addEventListener('click', () => goTo(i));
+            dotsWrap.appendChild(dot);
+          }
+          update();
+        }
+      });
+
+      // Gulir manual dengan drag/swipe (mouse & touch)
+      let isDragging = false;
+      let startX = 0;
+      let startTranslate = 0;
+
+      function getTranslatePercent() {
+        return -current * slideWidthPercent();
+      }
+
+      function onDragStart(clientX) {
+        isDragging = true;
+        startX = clientX;
+        startTranslate = getTranslatePercent();
+        track.style.transition = 'none';
+        viewport.classList.add('dragging');
+        clearInterval(autoTimer);
+      }
+      function onDragMove(clientX) {
+        if (!isDragging) return;
+        const deltaPx = clientX - startX;
+        const deltaPercent = (deltaPx / viewport.offsetWidth) * 100;
+        track.style.transform = `translateX(${startTranslate + deltaPercent}%)`;
+      }
+      function onDragEnd(clientX) {
+        if (!isDragging) return;
+        isDragging = false;
+        viewport.classList.remove('dragging');
+        track.style.transition = 'transform .5s ease';
+        const deltaPx = clientX - startX;
+        const threshold = viewport.offsetWidth * 0.15;
+        if (deltaPx < -threshold) {
+          goTo(current + 1);
+        } else if (deltaPx > threshold) {
+          goTo(current - 1);
+        } else {
+          update();
+          restartAuto();
+        }
+      }
+
+      viewport.addEventListener('mousedown', (e) => onDragStart(e.clientX));
+      window.addEventListener('mousemove', (e) => onDragMove(e.clientX));
+      window.addEventListener('mouseup', (e) => onDragEnd(e.clientX));
+
+      viewport.addEventListener('touchstart', (e) => onDragStart(e.touches[0].clientX), { passive: true });
+      viewport.addEventListener('touchmove', (e) => onDragMove(e.touches[0].clientX), { passive: true });
+      viewport.addEventListener('touchend', (e) => onDragEnd(e.changedTouches[0].clientX));
+
+      update();
       startAuto();
     })();
   </script>
