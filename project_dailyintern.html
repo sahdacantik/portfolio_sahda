@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DailyIntern – Sahda Rahani Susilawati</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green-dark:  #5a6e3f;
+      --green-mid:   #6e7f4e;
+      --green-card:  #b8c99a;
+      --green-bg:    #d4e3b5;
+      --green-tag:   #c8d9a8;
+      --olive:       #b7ae63;
+      --road:        #75875c;
+      --white:       #ffffff;
+      --text-dark:   #3d4a2e;
+      --text-muted:  #6b7a56;
+      --nav-h: 68px;
+    }
+
+    html { scroll-behavior: smooth; }
+    html, body {
+      width: 100%;
+      background: var(--green-bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-dark);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ── NAVBAR (sama seperti halaman lain) ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--green-dark);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      height: var(--nav-h);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo .logo-icon { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; }
+    .nav-logo .logo-icon img { width: 100%; height: 100%; object-fit: contain; }
+    .nav-links { display: flex; gap: 1.7rem; list-style: none; flex-wrap: wrap; }
+    .nav-links a {
+      color: var(--white); text-decoration: none; font-size: .95rem; font-weight: 500;
+      letter-spacing: 0.01em; transition: opacity .2s; padding-bottom: 4px; white-space: nowrap;
+    }
+    .nav-links a:hover { opacity: .7; }
+    .nav-links a.active { border-bottom: 2px solid var(--white); }
+
+    .work-switch { display: flex; align-items: center; gap: 10px; }
+    .work-switch .switch-track {
+      position: relative; width: 42px; height: 22px; background: #dff0c4;
+      border: 2px solid var(--white); border-radius: 999px; flex-shrink: 0;
+    }
+    .work-switch .switch-knob {
+      position: absolute; top: 1px; right: 1px; width: 14px; height: 14px;
+      background: var(--white); border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
+      animation: pulseKnob 2.4s ease-in-out infinite;
+    }
+    @keyframes pulseKnob {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
+      50%      { box-shadow: 0 0 0 6px rgba(255,255,255,0.12); }
+    }
+    .work-switch .switch-label { color: var(--white); font-size: .95rem; font-weight: 500; white-space: nowrap; }
+
+    /* ── PAGE ── */
+    .page { max-width: 920px; margin: 0 auto; padding: calc(var(--nav-h) + 2.2rem) 2rem 4rem; position: relative; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    .sparkle { position: absolute; color: var(--olive); opacity: .75; pointer-events: none; }
+    .sparkle.s1 { top: 130px; right: 6px; width: 20px; height: 20px; }
+    .sparkle.s2 { top: 150px; left: -4px; width: 14px; height: 14px; }
+
+    /* ── BACK LINK ── */
+    .back-link {
+      display: inline-flex; align-items: center; gap: .45rem;
+      font-size: .85rem; font-weight: 600; color: var(--text-dark);
+      text-decoration: none; margin-bottom: 1.4rem;
+      transition: gap .18s ease;
+    }
+    .back-link:hover { gap: .65rem; }
+    .back-link svg { width: 16px; height: 16px; }
+
+    /* ── TITLE ── */
+    .title-row { display: flex; align-items: flex-start; gap: 1rem; }
+    .title-icon {
+      flex-shrink: 0; width: 52px; height: 52px; border-radius: 14px;
+      background: var(--green-card);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .title-icon svg { width: 26px; height: 26px; color: var(--green-dark); }
+    .title-text h1 { font-family: 'DM Serif Display', serif; font-size: clamp(1.5rem, 3.6vw, 1.9rem); color: var(--text-dark); margin-bottom: .2rem; }
+    .title-text .sub { font-size: .92rem; color: var(--text-muted); }
+
+    .meta-tags {
+      display: flex; flex-wrap: wrap; gap: .6rem;
+      margin: 1.1rem 0 2.2rem calc(52px + 1rem);
+    }
+    .meta-tag {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .42rem .95rem; border-radius: 999px;
+      font-size: .82rem; font-weight: 600; color: var(--text-dark);
+      background: var(--green-card);
+    }
+    .meta-tag.type { background: var(--green-tag); }
+    .meta-tag svg { width: 14px; height: 14px; }
+
+    @media (max-width: 520px) {
+      .meta-tags { margin-left: 0; }
+    }
+
+    /* ── CONTENT: MOCKUP + INFO ── */
+    .content-grid { display: flex; gap: 2.4rem; flex-wrap: wrap; align-items: flex-start; margin-bottom: 2.4rem; }
+
+    .mockup-col { flex: 0 0 320px; }
+    .laptop-frame { width: 100%; }
+    .laptop-screen {
+      position: relative;
+      background: #2b2f26;
+      border-radius: 14px 14px 5px 5px;
+      padding: 11px 11px 16px;
+      box-shadow: 0 10px 22px rgba(61,74,46,0.25);
+    }
+    .laptop-screen .cam-dot {
+      position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
+      width: 5px; height: 5px; border-radius: 50%; background: #5a6250;
+    }
+    .laptop-screen .screen-inner {
+      background: var(--white); border-radius: 4px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      aspect-ratio: 16/10.5;
+    }
+    .laptop-screen .screen-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .laptop-base {
+      position: relative; width: 116%; margin-left: -8%; height: 13px;
+      background: linear-gradient(to bottom, #dcdccf, #b7b7a8);
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 3px 7px rgba(0,0,0,0.18);
+    }
+    .laptop-base::after {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 58px; height: 6px; background: #9aa08a; border-radius: 0 0 8px 8px;
+    }
+
+    .info-col { flex: 1; min-width: 280px; }
+    .info-block { margin-bottom: 1.6rem; }
+    .info-block:last-child { margin-bottom: 0; }
+    .info-block h2 { font-family: 'DM Serif Display', serif; font-size: 1.08rem; color: var(--text-dark); margin-bottom: .5rem; }
+    .info-block p { font-size: .89rem; line-height: 1.65; color: var(--text-dark); }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .tag {
+      background: var(--white); color: var(--text-dark);
+      font-size: .8rem; font-weight: 500;
+      padding: .35rem .8rem; border-radius: 999px;
+      box-shadow: 0 1px 3px rgba(61,74,46,0.12);
+    }
+
+    /* ── FEATURES / OUTCOME / ACTIONS ── */
+    .bottom-row { display: flex; gap: 2.4rem; flex-wrap: wrap; align-items: flex-start; }
+    .lists-col { flex: 1; display: flex; gap: 2.4rem; flex-wrap: wrap; min-width: 280px; }
+    .list-block { flex: 1; min-width: 180px; }
+    .list-block h2 { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--text-dark); margin-bottom: .8rem; }
+    .list-block ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .list-block li { display: flex; align-items: flex-start; gap: .55rem; font-size: .87rem; line-height: 1.4; color: var(--text-dark); }
+    .list-block li::before {
+      content: ''; flex-shrink: 0; width: 7px; height: 7px;
+      background: var(--green-dark); transform: rotate(45deg);
+      margin-top: .38rem;
+    }
+
+    .actions-col { flex-shrink: 0; display: flex; flex-direction: column; gap: .8rem; min-width: 200px; }
+    .action-btn {
+      display: flex; align-items: center; justify-content: space-between; gap: .7rem;
+      padding: .8rem 1.3rem; border-radius: 12px;
+      font-size: .88rem; font-weight: 600;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .action-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(61,74,46,0.25); }
+    .action-btn.primary { background: var(--green-dark); color: var(--white); }
+    .action-btn.secondary { background: var(--green-card); color: var(--text-dark); }
+    .action-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    @media (max-width: 640px) {
+      .actions-col { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="nav-logo" href="index.html">
+      <div class="logo-icon"><img src="assets/logo.png" alt="Logo"/></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="education.html">Education</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="experiences.html">Experiences</a></li>
+      <li><a href="organization.html">Organization</a></li>
+      <li><a href="project.html" class="active">Project</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="work-switch" role="status" aria-label="Status: Open to Work, aktif">
+      <div class="switch-track"><div class="switch-knob"></div></div>
+      <span class="switch-label">Open To Work</span>
+    </div>
+  </nav>
+
+  <main class="page">
+
+    <svg class="sparkle s1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg>
+    <svg class="sparkle s2" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg>
+
+    <!-- Back link -->
+    <a class="back-link reveal" href="project-software-development.html">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Projects
+    </a>
+
+    <!-- Title -->
+    <section class="reveal">
+      <div class="title-row">
+        <span class="title-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><rect x="9" y="1.5" width="6" height="3" rx="1" fill="currentColor"/><path d="M8.5 10.5h7M8.5 14h7M8.5 17.5h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        <div class="title-text">
+          <h1>DailyIntern</h1>
+          <p class="sub">Internship Management System</p>
+        </div>
+      </div>
+
+      <div class="meta-tags">
+        <span class="meta-tag">Software Development</span>
+        <span class="meta-tag type">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Internship - 2025
+        </span>
+      </div>
+    </section>
+
+    <!-- Mockup + Info -->
+    <section class="reveal content-grid">
+      <div class="mockup-col">
+        <div class="laptop-frame">
+          <div class="laptop-screen">
+            <span class="cam-dot"></span>
+            <div class="screen-inner">
+              <img src="assets/proj-dailyintern-screenshot.jpg" alt="Tampilan dashboard DailyIntern"/>
+            </div>
+          </div>
+          <div class="laptop-base"></div>
+        </div>
+      </div>
+
+      <div class="info-col">
+        <div class="info-block">
+          <h2>Overview</h2>
+          <p>A web-based system to manage the internship program, including registration, tracking, and reporting features.</p>
+        </div>
+        <div class="info-block">
+          <h2>My Role</h2>
+          <p>Full stack developer (UI/UX, frontend, backend, API integration, and deployment).</p>
+        </div>
+        <div class="info-block">
+          <h2>Tech Stack</h2>
+          <div class="tech-tags">
+            <span class="tag">Laravel</span>
+            <span class="tag">PHP</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features / Outcome / Actions -->
+    <section class="reveal bottom-row">
+      <div class="lists-col">
+        <div class="list-block">
+          <h2>Features</h2>
+          <ul>
+            <li>User authentication</li>
+            <li>Internship registration</li>
+            <li>Progress tracking</li>
+            <li>Admin dashboard</li>
+          </ul>
+        </div>
+        <div class="list-block">
+          <h2>Outcome</h2>
+          <ul>
+            <li>Simplified internship management</li>
+            <li>Better data organization</li>
+            <li>Easier monitoring and reporting</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="actions-col">
+        <a class="action-btn primary" href="#" target="_blank" rel="noopener">
+          View Live Demo
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="action-btn secondary" href="#" target="_blank" rel="noopener">
+          View GitHub
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    (function () {
+      const revealEls = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      revealEls.forEach((el) => io.observe(el));
+    })();
+  </script>
+
+</body>
+</html>
