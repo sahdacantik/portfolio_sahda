@@ -152,8 +152,8 @@
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
       <li><a href="education.html">Education</a></li>
-      <li><a href="skil.html">Skills</a></li>
-      <li><a href="experience.html">Experiences</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="experiences.html">Experiences</a></li>
       <li><a href="organization.html">Organization</a></li>
       <li><a href="project.html" class="active">Project</a></li>
       <li><a href="contact.html">Contact</a></li>
@@ -188,7 +188,7 @@
         <div class="project-card-body">
           <div class="project-card-head">
             <h2 class="project-card-title">DailyIntern</h2>
-            <a class="project-arrow-btn" href="#" target="_blank" rel="noopener" aria-label="Lihat proyek DailyIntern">
+            <a class="project-arrow-btn" href="project-dailyintern.html" aria-label="Lihat proyek DailyIntern">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
