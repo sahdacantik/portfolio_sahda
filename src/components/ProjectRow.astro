@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { url } from '../data/site';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, tagline, context, stack } = project.data;
+---
+
+<li>
+  <a
+    href={url(`projects/${project.id}/`)}
+    class="group grid gap-1 border-b border-line py-4 transition-colors hover:border-accent md:grid-cols-[1fr_1.4fr_auto] md:items-center md:gap-6"
+  >
+    <span class="font-medium">{title}</span>
+    <span class="text-sm text-muted">{tagline} · {stack.slice(0, 3).join(', ')}</span>
+    <span class="font-mono text-xs text-muted group-hover:text-accent">{context} <span aria-hidden="true">→</span></span>
+  </a>
+</li>

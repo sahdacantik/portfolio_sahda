@@ -1,0 +1,149 @@
+---
+import { getCollection } from 'astro:content';
+import { profile, socials, url } from '../data/site';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+const commands = [
+  { group: 'Pages', label: 'Home', href: url() },
+  { group: 'Pages', label: 'All projects', href: url('projects/') },
+  { group: 'Pages', label: 'Experience', href: url('#experience') },
+  { group: 'Pages', label: 'Skills', href: url('#skills') },
+  { group: 'Pages', label: 'About & education', href: url('about/') },
+  { group: 'Pages', label: 'Contact', href: url('#contact') },
+  ...projects.map((p) => ({ group: 'Projects', label: p.data.title, href: url(`projects/${p.id}/`) })),
+  { group: 'Actions', label: 'Toggle theme', action: 'theme' },
+  { group: 'Actions', label: 'Copy email address', action: 'email' },
+  { group: 'Links', label: 'View CV', href: profile.cv, external: true },
+  ...socials.map((s) => ({ group: 'Links', label: s.label, href: s.href, external: true })),
+];
+---
+
+<dialog
+  id="palette"
+  aria-label="Command palette"
+  class="m-auto w-[min(36rem,calc(100vw-2rem))] rounded-token border border-line bg-surface p-0 text-fg shadow-2xl backdrop:bg-black/50"
+>
+  <input
+    id="palette-input"
+    type="text"
+    role="combobox"
+    aria-expanded="true"
+    aria-controls="palette-list"
+    aria-label="Type a command or search"
+    autocomplete="off"
+    placeholder="Type a command or search"
+    class="w-full border-b border-line bg-transparent px-4 py-3.5 outline-none placeholder:text-muted"
+  />
+  <ul id="palette-list" role="listbox" aria-label="Commands" class="max-h-80 overflow-y-auto p-2">
+    {
+      commands.map((command) => (
+        <li
+          role="option"
+          aria-selected="false"
+          data-command
+          data-href={command.href}
+          data-action={command.action}
+          data-external={command.external ? 'true' : undefined}
+          class="flex cursor-pointer items-center justify-between gap-4 rounded-token px-3 py-2.5 text-sm aria-selected:bg-accent-soft"
+        >
+          <span>{command.label}</span>
+          <span class="font-mono text-xs text-muted">{command.group}</span>
+        </li>
+      ))
+    }
+  </ul>
+  <p id="palette-empty" hidden class="p-6 text-center text-sm text-muted">No results.</p>
+  <p id="palette-status" role="status" class="sr-only"></p>
+</dialog>
+
+<script>
+  import { toggleTheme } from '../scripts/theme';
+
+  const dialog = document.querySelector<HTMLDialogElement>('#palette')!;
+  const input = document.querySelector<HTMLInputElement>('#palette-input')!;
+  const empty = document.querySelector<HTMLElement>('#palette-empty')!;
+  const status = document.querySelector<HTMLElement>('#palette-status')!;
+  const items = [...dialog.querySelectorAll<HTMLElement>('[data-command]')];
+  const email = 'sahdarahani@gmail.com';
+  let active = 0;
+
+  items.forEach((item, index) => (item.id = `palette-option-${index}`));
+
+  const visible = () => items.filter((item) => !item.hidden);
+
+  function highlight(index: number) {
+    const list = visible();
+    active = list.length ? (index + list.length) % list.length : 0;
+    items.forEach((item) => item.setAttribute('aria-selected', 'false'));
+    const current = list[active];
+    current?.setAttribute('aria-selected', 'true');
+    current?.scrollIntoView({ block: 'nearest' });
+    if (current) input.setAttribute('aria-activedescendant', current.id);
+    else input.removeAttribute('aria-activedescendant');
+  }
+
+  function filter() {
+    const query = input.value.trim().toLowerCase();
+    items.forEach((item) => (item.hidden = !item.textContent!.toLowerCase().includes(query)));
+    empty.hidden = visible().length > 0;
+    highlight(0);
+  }
+
+  function open() {
+    input.value = '';
+    status.textContent = '';
+    filter();
+    dialog.showModal();
+    input.focus();
+  }
+
+  async function run(item?: HTMLElement) {
+    if (!item) return;
+    const { href, action, external } = item.dataset;
+    if (action === 'theme') toggleTheme();
+    if (action === 'email') {
+      try {
+        await navigator.clipboard.writeText(email);
+        status.textContent = 'Email copied';
+      } catch {
+        location.href = `mailto:${email}`;
+      }
+    }
+    dialog.close();
+    if (href) {
+      if (external) window.open(href, '_blank', 'noopener');
+      else location.href = href;
+    }
+  }
+
+  document.querySelector('[data-palette-open]')?.addEventListener('click', open);
+
+  document.addEventListener('keydown', (event) => {
+    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+      event.preventDefault();
+      dialog.open ? dialog.close() : open();
+    }
+  });
+
+  input.addEventListener('input', filter);
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      highlight(active + (event.key === 'ArrowDown' ? 1 : -1));
+    } else if (event.key === 'Enter') {
+      event.preventDefault();
+      run(visible()[active]);
+    }
+  });
+
+  items.forEach((item) => {
+    item.addEventListener('click', () => run(item));
+    item.addEventListener('mousemove', () => highlight(visible().indexOf(item)));
+  });
+
+  // A click on the backdrop lands on the dialog element itself.
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+</script>

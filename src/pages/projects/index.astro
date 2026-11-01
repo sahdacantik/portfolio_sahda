@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Projects" description="Frontend, full stack, and mobile projects by Sahda Rahani Susilawati.">
+  <section class="py-14">
+    <p class="eyebrow">Projects</p>
+    <h1 class="mt-2 text-4xl font-semibold tracking-tight">All work</h1>
+    <p class="mt-4 max-w-xl text-muted">Turning ideas into digital solutions, from internship projects to my undergraduate thesis.</p>
+    <div class="mt-10 grid gap-5 md:grid-cols-2">
+      {projects.map((project, index) => <ProjectCard project={project} priority={index < 2} />)}
+    </div>
+  </section>
+</Base>

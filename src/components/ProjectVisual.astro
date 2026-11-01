@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  priority?: boolean;
+  // Project pages fit the box to the content instead of a fixed card ratio.
+  detail?: boolean;
+}
+
+const { project, priority = false, detail = false } = Astro.props;
+const { cover, coverAlt, device, visual, title } = project.data;
+const loading = priority ? 'eager' : 'lazy';
+---
+
+<div
+  class:list={[
+    'relative flex items-end justify-center overflow-hidden bg-surface-2 px-6 pt-6',
+    detail ? 'pt-10' : 'aspect-[16/10]',
+    detail && device === 'phone' && cover && 'h-96 sm:h-[28rem]',
+  ]}
+>
+  {
+    cover && device === 'browser' && (
+      <div class="w-full max-w-xl overflow-hidden rounded-t-token border border-b-0 border-line bg-surface shadow-lg">
+        <div class="flex gap-1.5 border-b border-line px-3 py-2" aria-hidden="true">
+          <span class="size-2 rounded-full bg-line" />
+          <span class="size-2 rounded-full bg-line" />
+          <span class="size-2 rounded-full bg-line" />
+        </div>
+        <Image src={cover} alt={coverAlt ?? title} widths={[480, 648]} sizes="(min-width: 768px) 576px, 90vw" loading={loading} class="w-full" />
+      </div>
+    )
+  }
+  {
+    cover && device === 'phone' && (
+      <div class:list={['overflow-hidden rounded-t-3xl border-4 border-b-0 border-fg/80 shadow-lg', detail ? 'h-full w-64 sm:w-80' : '-mb-12 w-44 sm:w-52']}>
+        <Image src={cover} alt={coverAlt ?? title} widths={[220, 440, 640]} sizes={detail ? '320px' : '208px'} loading={loading} class="w-full" />
+      </div>
+    )
+  }
+  {
+    visual === 'components' && (
+      <div class="mb-6 grid w-full max-w-md grid-cols-2 gap-3 self-center" role="img" aria-label="Illustration of KPI and status components, using sample data">
+        <div class="card p-4">
+          <p class="text-xs text-muted">Total items</p>
+          <p class="mt-1 text-2xl font-semibold">128</p>
+        </div>
+        <div class="card p-4">
+          <p class="text-xs text-muted">In review</p>
+          <p class="mt-1 text-2xl font-semibold text-accent">24</p>
+        </div>
+        <div class="card col-span-2 flex flex-wrap items-center gap-2 p-4">
+          <span class="rounded-full bg-accent px-2.5 py-1 text-xs font-medium text-on-accent">Approved</span>
+          <span class="rounded-full bg-accent-soft px-2.5 py-1 text-xs font-medium text-accent">Pending</span>
+          <span class="rounded-full border border-line px-2.5 py-1 text-xs text-muted">Draft</span>
+          <span class="ml-auto font-mono text-xs text-muted">sample data</span>
+        </div>
+      </div>
+    )
+  }
+  {
+    visual === 'tokens' && (
+      <div class="card mb-6 w-full max-w-md self-center p-4 font-mono text-xs leading-6 sm:text-sm sm:leading-7" role="img" aria-label="Code snippet of this site's CSS design tokens">
+        <p class="text-muted">:root {'{'}</p>
+        <p class="pl-4"><span class="text-accent">--accent</span>: <span class="inline-block size-2.5 rounded-sm bg-accent" />;</p>
+        <p class="pl-4"><span class="text-accent">--surface</span>: <span class="inline-block size-2.5 rounded-sm border border-line bg-surface" />;</p>
+        <p class="pl-4"><span class="text-accent">--radius</span>: 10px;</p>
+        <p class="text-muted">{'}'}</p>
+      </div>
+    )
+  }
+</div>
