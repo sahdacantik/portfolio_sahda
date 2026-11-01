@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectVisual from './ProjectVisual.astro';
+import { url } from '../data/site';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  priority?: boolean;
+}
+
+const { project, priority } = Astro.props;
+const { title, tagline, context, stack } = project.data;
+---
+
+<article class="card group relative flex flex-col overflow-hidden transition-colors hover:border-accent">
+  <ProjectVisual project={project} priority={priority} />
+  <div class="flex flex-1 flex-col border-t border-line p-5">
+    <p class="eyebrow">{context}</p>
+    <h3 class="mt-2 text-lg font-semibold tracking-tight">
+      <a href={url(`projects/${project.id}/`)} class="after:absolute after:inset-0">
+        {title}
+        <span aria-hidden="true" class="ml-1 inline-block text-accent transition-transform group-hover:translate-x-1">→</span>
+      </a>
+    </h3>
+    <p class="mt-1 text-sm text-muted">{tagline}</p>
+    <ul class="mt-4 flex flex-wrap gap-1.5">
+      {stack.slice(0, 4).map((tech) => <li class="chip">{tech}</li>)}
+    </ul>
+  </div>
+</article>
