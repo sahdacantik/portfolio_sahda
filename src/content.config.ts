@@ -22,7 +22,7 @@ const projects = defineCollection({
       coverAlt: z.string().optional(),
       device: z.enum(['browser', 'phone']).default('browser'),
       // Drawn in CSS for projects that have no public screenshot.
-      visual: z.enum(['components', 'tokens']).optional(),
+      visual: z.enum(['components']).optional(),
       links: z.object({ live: z.url().optional(), repo: z.url().optional() }).default({}),
     }),
 });

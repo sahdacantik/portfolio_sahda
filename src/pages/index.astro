@@ -43,8 +43,13 @@ const others = projects.filter((p) => !p.data.featured);
 
   <section id="work" class="scroll-mt-20 py-12">
     <SectionHeading label="Selected work" title="Projects I'm proud of" />
-    <div class="grid gap-5 md:grid-cols-2">
-      {featured.map((project, index) => <ProjectCard project={project} priority={index < 2} />)}
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {
+        featured.map((project, index) => (
+          // An odd last card spans both columns on tablets so the grid has no gap.
+          <ProjectCard project={project} priority={index < 3} class={featured.length % 2 && index === featured.length - 1 ? 'md:max-lg:col-span-2 md:max-lg:[&>div:first-child]:aspect-[21/9]' : undefined} />
+        ))
+      }
     </div>
 
     <h3 class="mt-14 font-mono text-sm text-muted">More projects</h3>
@@ -106,8 +111,8 @@ const others = projects.filter((p) => !p.data.featured);
         <p class="eyebrow">Contact</p>
         <h2 class="mt-2 text-2xl font-semibold tracking-tight text-balance sm:text-3xl">Interested in working together? Let's connect!</h2>
         <div class="mt-6 flex flex-wrap gap-3">
-          <a href={`mailto:${profile.email}`} class="btn btn-primary">{profile.email}</a>
-          <a href={`tel:${profile.phone.replaceAll('-', '')}`} class="btn">{profile.phone}</a>
+          <a href={profile.gmail} target="_blank" rel="noopener" class="btn btn-primary">{profile.email}</a>
+          <a href={profile.whatsapp} target="_blank" rel="noopener" class="btn">WhatsApp · {profile.phone}</a>
         </div>
         <ul class="mt-5 flex flex-wrap gap-4 text-sm text-muted">
           {
