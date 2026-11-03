@@ -4,6 +4,8 @@ export const profile = {
   location: 'Bogor, Indonesia',
   email: 'sahdarahani@gmail.com',
   phone: '0822-1308-1354',
+  whatsapp: 'https://wa.me/6282213081354',
+  gmail: 'https://mail.google.com/mail/?view=cm&fs=1&to=sahdarahani@gmail.com',
   cv: 'https://drive.google.com/drive/folders/1C4R8RNzIC9Na3XWbv6iKtmXvaQb6cxS_?usp=sharing',
   description:
     'Frontend engineer building interfaces from design tokens to production pages, with a background in computer science, UI/UX, and mobile.',

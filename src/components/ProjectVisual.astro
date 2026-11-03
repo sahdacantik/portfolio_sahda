@@ -35,7 +35,7 @@ const loading = priority ? 'eager' : 'lazy';
   }
   {
     cover && device === 'phone' && (
-      <div class:list={['overflow-hidden rounded-t-3xl border-4 border-b-0 border-fg/80 shadow-lg', detail ? 'h-full w-64 sm:w-80' : '-mb-12 w-44 sm:w-52']}>
+      <div class:list={['overflow-hidden rounded-t-3xl border-4 border-b-0 border-fg/80 shadow-lg', detail ? 'h-full w-64 sm:w-80' : 'w-44 self-start sm:w-52']}>
         <Image src={cover} alt={coverAlt ?? title} widths={[220, 440, 640]} sizes={detail ? '320px' : '208px'} loading={loading} class="w-full" />
       </div>
     )
@@ -57,17 +57,6 @@ const loading = priority ? 'eager' : 'lazy';
           <span class="rounded-full border border-line px-2.5 py-1 text-xs text-muted">Draft</span>
           <span class="ml-auto font-mono text-xs text-muted">sample data</span>
         </div>
-      </div>
-    )
-  }
-  {
-    visual === 'tokens' && (
-      <div class="card mb-6 w-full max-w-md self-center p-4 font-mono text-xs leading-6 sm:text-sm sm:leading-7" role="img" aria-label="Code snippet of this site's CSS design tokens">
-        <p class="text-muted">:root {'{'}</p>
-        <p class="pl-4"><span class="text-accent">--accent</span>: <span class="inline-block size-2.5 rounded-sm bg-accent" />;</p>
-        <p class="pl-4"><span class="text-accent">--surface</span>: <span class="inline-block size-2.5 rounded-sm border border-line bg-surface" />;</p>
-        <p class="pl-4"><span class="text-accent">--radius</span>: 10px;</p>
-        <p class="text-muted">{'}'}</p>
       </div>
     )
   }

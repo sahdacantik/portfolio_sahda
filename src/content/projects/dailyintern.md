@@ -3,7 +3,8 @@ title: DailyIntern
 tagline: Internship management system
 category: Full Stack
 context: Internship · 2025
-order: 6
+order: 2
+featured: true
 role: Full stack developer (UI/UX, frontend, backend, API integration, and deployment).
 stack: [Laravel, PHP, MySQL, HTML, CSS, JavaScript]
 cover: ../../assets/projects/dailyintern.png

@@ -3,8 +3,8 @@ title: Cafe Pink
 tagline: Food & beverage mobile application
 category: Frontend
 context: Personal Project
-featured: true
-order: 4
+featured: false
+order: 5
 role: Frontend Developer. Implemented the mobile interface based on the provided UI/UX design using Flutter and Dart, including screen layouts, navigation, and interactive interface elements.
 stack: [Flutter, Dart, Figma]
 cover: ../../assets/projects/cafe-pink.webp

@@ -3,7 +3,7 @@ title: SPKP & SPAK
 tagline: Web-based public service evaluation platform
 category: Frontend
 context: Internship · 2025
-order: 5
+order: 6
 role: System Analyst & Frontend Developer, responsible for requirement analysis and building the survey and dashboard interfaces.
 stack: [Laravel, PHP, MySQL, HTML, CSS, JavaScript]
 cover: ../../assets/projects/spkp-spak.png

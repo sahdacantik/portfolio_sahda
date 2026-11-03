@@ -3,8 +3,8 @@ title: Guestly
 tagline: Digital guest book system
 category: Frontend
 context: Internship · 2025
-featured: true
-order: 3
+featured: false
+order: 4
 role: System Analyst & Frontend Developer, responsible for requirement analysis and building the visitor registration and admin dashboard interfaces.
 stack: [Laravel, PHP, MySQL, HTML, CSS, JavaScript]
 cover: ../../assets/projects/guestly.png

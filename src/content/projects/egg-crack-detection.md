@@ -1,9 +1,10 @@
 ---
-title: Egg Crack Detection
-tagline: Mobile application for egg quality detection
+title: EggCheck
+tagline: Egg crack detection mobile app
 category: AI & Mobile
 context: Undergraduate Thesis · 2026
-order: 7
+order: 3
+featured: true
 role: Full-stack & machine learning developer, working across the ML pipeline, mobile application development, and system integration.
 stack: [Flutter, Dart, Python, TensorFlow, TFLite, MobileNetV2, OpenCV]
 cover: ../../assets/projects/egg-crack-detection.webp
